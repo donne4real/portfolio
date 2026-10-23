@@ -1,0 +1,31 @@
+[build]
+  publish = "."
+  command = ""
+
+[build.processing]
+  skip_processing = false
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/repo"
+  to = "https://github.com/donne4real"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aso-oke"
+  to = "https://github.com/donne4real/aso-oke"
+  status = 301
+  force = true
