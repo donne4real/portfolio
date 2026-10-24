@@ -135,21 +135,6 @@ const PROJECTS = {
       ]
     },
     {
-      title: "Daily Plan",
-      kind: "Scheduling web app",
-      status: "live",
-      desc: "A clean, responsive planner for shaping a day — scheduling, task views and a fast interface deployed straight from the repository on every push.",
-      tags: ["JavaScript", "Vite", "Netlify"],
-      metrics: [
-        ["Deploy", "Push-to-deploy"],
-        ["Hosting", "Netlify"]
-      ],
-      links: [
-        { label: "Repository", href: "https://github.com/donne4real/daily-plan" },
-        { label: "Live", href: "https://leyes-daily-plan.netlify.app", external: true }
-      ]
-    },
-    {
       title: "PocketOffice",
       kind: "Browser office suite",
       status: "live",
@@ -165,18 +150,19 @@ const PROJECTS = {
       ]
     },
     {
-      title: "Tappers' Apprentice",
-      kind: "Interactive narrative game",
+      title: "Powerball Predictor",
+      kind: "Statistical analysis engine",
       status: "live",
-      desc: "A Nigerian-set interactive story driven by a custom JavaScript engine, with original character art and a branching scene system.",
-      tags: ["JavaScript", "Game", "Storytelling"],
+      desc: "Hot/cold frequency analysis, due-number tracking and weighted prediction strategies over 296 historical draws. The browser build is a faithful port of the Python engine — both were run against the same dataset and diffed, and every output matches exactly.",
+      tags: ["Python", "Flask", "JavaScript", "Chart.js", "Statistics"],
       metrics: [
-        ["Engine", "Custom JS"],
-        ["Art", "Original"]
+        ["Draws analysed", "296"],
+        ["Prediction strategies", "4"],
+        ["Python / JS parity", "Exact"]
       ],
       links: [
-        { label: "Repository", href: "https://github.com/donne4real/tappers-apprentice" },
-        { label: "Live", href: "https://donne4real.github.io/tappers-apprentice/", external: true }
+        { label: "Repository", href: "https://github.com/donne4real/powerball-predictor" },
+        { label: "Live", href: "https://powerball-predictor.netlify.app", external: true }
       ]
     },
     {
@@ -230,6 +216,12 @@ const PROJECTS = {
       state: "up"
     },
     {
+      name: "Powerball Predictor",
+      url: "https://powerball-predictor.netlify.app",
+      desc: "Powerball analysis engine: hot/cold/balanced prediction strategies over 296 historical draws.",
+      state: "up"
+    },
+    {
       name: "Exam Prep NG",
       url: "https://donne4real.github.io/exam-prep-ng/",
       desc: "WAEC, NECO and JAMB question banks across 12 subjects.",
@@ -239,18 +231,6 @@ const PROJECTS = {
       name: "PocketOffice",
       url: "https://donne4real.github.io/PocketOffice/",
       desc: "Writer, Calc, Impress, text editor and PDF tools in a browser.",
-      state: "up"
-    },
-    {
-      name: "Tappers' Apprentice",
-      url: "https://donne4real.github.io/tappers-apprentice/",
-      desc: "An interactive Nigerian-set story with a custom engine.",
-      state: "up"
-    },
-    {
-      name: "Daily Plan",
-      url: "https://leyes-daily-plan.netlify.app",
-      desc: "Scheduling and task views for shaping a day.",
       state: "up"
     },
     {
