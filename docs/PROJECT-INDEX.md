@@ -477,7 +477,11 @@ CombinedMarketAnalyzer       —
 ETFAnalyzer                  —
 MutualFundAnalyzer           —
 stock-market-analyzer        —
-aso-oke                      Target: 22 Nov 2026
+aso-oke                      Target: 13 Dec 2026
+portfolio                    leye-ajibola.netlify.app
+powerball-predictor          powerball-predictor.netlify.app
+donne4real (profile)         github.com/donne4real
+cert-mastery                 cert-mastery.netlify.app
 ```
 
 ---
@@ -486,16 +490,19 @@ aso-oke                      Target: 22 Nov 2026
 
 - `gx-dashboard`, `gx-screener`, `gx-tracker` local folders are OneDrive placeholders — contents read via `SESSION_SUMMARY_20260924.md`, not directly.
 - `custody-calendar` and `ExcelAI` show no git remote (local repos only).
-- `C:\Users\Public\powerball-predictor\` has no git repo — version history not available.
 - `Power Predictor App.docx` body text is 3 embedded PNG screenshots; no LibreOffice/Word available to render, so the screenshots were read directly as images.
 - Transcripts for the earliest (3 Jul) sessions could not be read; those entries come from filesystem artifacts only.
+- **`ars` and `report_analyzer`** (audit-report workstream) — both private and **archived** as of 23 Oct 2026, so they are read-only and gone from the public profile. Permanent deletion needs the `gh` token's `delete_repo` scope. Local backups: `_deleted_repo_backup/` in the session workspace.
 
 ---
 
-## ⚠️ Security note (found 23 Oct 2026)
+## 🔑 Credential hygiene (found 23 Oct 2026)
 
-`C:\Users\leyea\OneDrive\Documents\Vibe Coding\keys.txt` and `keys_.txt` contain **plaintext API credentials** in an OneDrive-synced folder:
-- a Databricks token (`dapi…`)
-- a DeepSeek API key (`sk-…`) with `setx` persistence commands
+Two sets of plaintext credentials sit in OneDrive-synced folders. **Treat both as exposed and rotate them.**
 
-**Recommended:** rotate both keys, move them to environment variables or a secrets manager, and delete the plaintext files. Anything in OneDrive is synced to cloud storage and should be treated as exposed.
+| File | Credential | Action needed |
+|---|---|---|
+| `Vibe Coding\keys.txt` | Databricks token (`dapi…`) | Revoke in Databricks, move to env var / secret store, delete file |
+| `Vibe Coding\keys_.txt` | DeepSeek API key (`sk-…`) + `setx` persistence commands | Revoke in DeepSeek, move to env var / secret store, delete file |
+
+Anything in OneDrive is synced to cloud storage. GitHub repo secrets (`NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`) are encrypted and are the correct pattern for the new deploy pipelines.
