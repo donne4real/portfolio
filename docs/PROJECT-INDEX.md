@@ -492,7 +492,7 @@ cert-mastery                 cert-mastery.netlify.app
 - `custody-calendar` and `ExcelAI` show no git remote (local repos only).
 - `Power Predictor App.docx` body text is 3 embedded PNG screenshots; no LibreOffice/Word available to render, so the screenshots were read directly as images.
 - Transcripts for the earliest (3 Jul) sessions could not be read; those entries come from filesystem artifacts only.
-- **`ars` and `report_analyzer`** (audit-report workstream) — both private and **archived** as of 23 Oct 2026, so they are read-only and gone from the public profile. Permanent deletion needs the `gh` token's `delete_repo` scope. Local backups: `_deleted_repo_backup/` in the session workspace.
+- **`ars` and `report_analyzer`** (audit-report workstream) — **permanently deleted from GitHub on 23 Oct 2026** after the `delete_repo` scope was granted. Local backups retained: `_deleted_repo_backup/` in the session workspace.
 
 ---
 

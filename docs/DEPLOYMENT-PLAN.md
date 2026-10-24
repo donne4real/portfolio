@@ -114,8 +114,8 @@ they are simply not featured.
 | Visibility | Repos |
 |---|---|
 | **Public, featured** | portfolio, donne4real (profile), aso-oke, bible-app, bible-verse-detector, bible-verse-detector-web, cert-mastery, datainsight, daily-plan, DocSummarization, exam-prep-ng, MarketSage-Analyzer, CombinedMarketAnalyzer, ETFAnalyzer, MutualFundAnalyzer, 100BaggerScreener, stock-market-analyzer, wagner_stock_screener, stock_screener, ngx-tracker, PocketOffice, tappers-apprentice, vocabulary_app, sermon-listener, ds4a_work, Amazon-Bedrock-Summarization-Long-Document-POC |
-| **Private (kept)** | stage_local_llm, qwen2.5-1.5b-model, data_insights, report_analyzer |
-| **Deleted 23 Oct 2026** | ars, report_analyzer *(audit-report workstream — local backup kept)* |
+| **Private (kept)** | stage_local_llm, qwen2.5-1.5b-model, data_insights |
+| **Deleted 23 Oct 2026** | ars, report_analyzer *(audit-report workstream — deleted after `delete_repo` scope was granted; local backup kept)* |
 
 ---
 
@@ -158,7 +158,7 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 | 6 | **`sermon-listener`** | Public but not featured — decide if it belongs | 5 min |
 | 7 | **Open Graph image** | Portfolio has no `og:image` — add a screenshot for link previews | 15 min |
 | 8 | **Resume PDF** | Aso Oke ships a whitepaper + field reports; assemble a 1-page PDF resume from `CAREER-ASSETS.md` | 1 hr |
-| 9 | **Delete `ars` + `report_analyzer`** | Audit-report workstream; the `gh` token lacks the `delete_repo` scope. Local backup exists in the session workspace | 2 min once authorised |
+| 9 | ~~Delete `ars` + `report_analyzer`~~ | **Done 23 Oct 2026** — both permanently deleted from GitHub once the `delete_repo` scope was granted; local backups retained in the session workspace | — |
 
 ---
 
