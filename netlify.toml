@@ -13,10 +13,13 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+# These assets are edited by hand (no build step, no content hashing), so they
+# must revalidate on every request. A long immutable cache would serve stale
+# project data after a push.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[redirects]]
   from = "/repo"
