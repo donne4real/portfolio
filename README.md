@@ -43,6 +43,24 @@ assets/
 
 Then commit and push — Netlify redeploys automatically.
 
+### ⚠️ Bump the asset version when you change CSS or JS
+
+`index.html` references assets with a version query string:
+
+```html
+<link rel="stylesheet" href="assets/css/style.css?v=20261024">
+<script src="assets/js/projects.js?v=20261024"></script>
+```
+
+**Whenever you edit `style.css`, `main.js` or `projects.js`, bump `?v=` in all three
+references.** The assets are hand-edited with no content hashing, so without a version
+bump a returning visitor's browser can serve a stale copy. `netlify.toml` sets
+`Cache-Control: max-age=0, must-revalidate` on `/assets/*` as a second line of defence,
+but the version bump is the guarantee.
+
+Changing only `projects.js` content (the data) does **not** need a version bump —
+edit the data and push, and the page picks it up on the next load.
+
 ### Design tokens
 
 All colour, radius and typography values live in the `:root` block of `assets/css/style.css`.
