@@ -86,20 +86,23 @@ const PROJECTS = {
 
   engineering: [
     {
-      title: "Word Up",
+      title: "Bible in African Languages",
       kind: "Offline-first Bible reader",
       status: "live",
-      desc: "22 translations across African and world languages, 19 of them bundled as static JSON so it works with no connection. Study tools, four reading plans, comparison layouts, and WhatsApp sharing.",
-      tags: ["React", "TypeScript", "Tailwind", "Cloudflare Workers", "Jest"],
+      desc: "22 translations across African and world languages, 19 of them bundled as static JSON so it works with no connection. Study tools, four reading plans, comparison layouts, and WhatsApp sharing. Published on Google Play as an Android app, with no data collected and nothing shared with third parties.",
+      tags: ["React", "TypeScript", "Tailwind", "Cloudflare Workers", "Capacitor", "Jest"],
       metrics: [
         ["Translations", "22"],
         ["Bundled offline", "19"],
+        ["Google Play rating", "4.6"],
         ["Test suite", "45 tests"],
         ["Reading plans", "4"]
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/bible-app" },
-        { label: "Live", href: "https://bible-app.leyesapps.workers.dev", external: true }
+        { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader", external: true },
+        { label: "Web app", href: "https://bible-app.leyesapps.workers.dev", external: true },
+        { label: "Store page", href: "https://wordupbibleapp.netlify.app", external: true }
       ]
     },
     {
@@ -198,9 +201,15 @@ const PROJECTS = {
 
   demos: [
     {
-      name: "Word Up — Bible Reader",
+      name: "Bible in African Languages",
       url: "https://bible-app.leyesapps.workers.dev",
       desc: "22 translations, offline-capable, with study tools and reading plans.",
+      state: "up"
+    },
+    {
+      name: "Bible in African Languages — Google Play",
+      url: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader",
+      desc: "Published Android app, 4.6 stars. No data collected, nothing shared.",
       state: "up"
     },
     {
@@ -240,9 +249,21 @@ const PROJECTS = {
       state: "up"
     },
     {
-      name: "Word Up — Netlify build",
+      name: "Bible in African Languages — Netlify build",
       url: "https://bibleinafricanlanguages.netlify.app",
       desc: "The same reader on the Netlify pipeline.",
+      state: "up"
+    },
+    {
+      name: "Bible in African Languages — Store page",
+      url: "https://wordupbibleapp.netlify.app",
+      desc: "The landing page the Google Play listing points to.",
+      state: "up"
+    },
+    {
+      name: "Bible Verse Detector",
+      url: "https://bible-verse-detector.netlify.app",
+      desc: "Isolates and identifies Bible verses in text.",
       state: "up"
     },
     {

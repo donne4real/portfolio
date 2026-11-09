@@ -1,6 +1,6 @@
 # Deployment Plan — Leye Ajibola Portfolio
 
-**Created:** 23 Oct 2026 · **Status:** live and operational
+**Created:** 23 Oct 2026 · **Updated:** 9 Nov 2026 · **Status:** live and operational
 
 ---
 
@@ -83,22 +83,26 @@ assets/js/main.js     rendering + interactions
 
 ---
 
-## The fleet — live URLs (all verified 200 on 23 Oct 2026)
+## The fleet — live URLs (all verified 200 on 9 Nov 2026)
 
 | # | Project | Host | URL | Repo |
 |---|---|---|---|---|
 | 1 | Portfolio hub | Netlify | https://leye-ajibola.netlify.app | `donne4real/portfolio` |
-| 2 | Word Up (edge) | Cloudflare Workers | https://bible-app.leyesapps.workers.dev | `donne4real/bible-app` |
-| 3 | Word Up (netlify) | Netlify | https://bibleinafricanlanguages.netlify.app | `donne4real/bible-app` |
-| 4 | NGX Tracker | Cloudflare Pages | https://ngx-tracker.pages.dev | `donne4real/ngx-tracker` |
-| 5 | Cert Mastery | Netlify | https://cert-mastery.netlify.app | `donne4real/cert-mastery` |
-| 6 | Powerball Predictor | Netlify | https://powerball-predictor.netlify.app | `donne4real/powerball-predictor` |
-| 7 | Exam Prep NG | GitHub Pages | https://donne4real.github.io/exam-prep-ng/ | `donne4real/exam-prep-ng` |
-| 8 | PocketOffice | GitHub Pages | https://donne4real.github.io/PocketOffice/ | `donne4real/PocketOffice` |
-| 9 | Vocabulary App | Netlify | https://build-my-vocab.netlify.app | `donne4real/vocabulary_app` |
-| 10 | Nia The Investigator | Netlify | https://niatheinvestigator.netlify.app | *(no repo)* |
+| 2 | Bible in African Languages (edge) | Cloudflare Workers | https://bible-app.leyesapps.workers.dev | `donne4real/bible-app` |
+| 3 | Bible in African Languages (netlify) | Netlify | https://bibleinafricanlanguages.netlify.app | `donne4real/bible-app` |
+| 4 | Bible in African Languages — Google Play | Google Play | https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader | `donne4real/bible-app` |
+| 5 | Bible in African Languages — store page | Netlify | https://wordupbibleapp.netlify.app | *(landing page)* |
+| 6 | Bible Verse Detector | Netlify | https://bible-verse-detector.netlify.app | `donne4real/bible-verse-detector` |
+| 7 | NGX Tracker | Cloudflare Pages | https://ngx-tracker.pages.dev | `donne4real/ngx-tracker` |
+| 8 | Cert Mastery | Netlify | https://cert-mastery.netlify.app | `donne4real/cert-mastery` |
+| 9 | Cert Mastery (mirror) | Netlify | https://certification-mastery.netlify.app | `donne4real/cert-mastery` |
+| 10 | Powerball Predictor | Netlify | https://powerball-predictor.netlify.app | `donne4real/powerball-predictor` |
+| 11 | Exam Prep NG | GitHub Pages | https://donne4real.github.io/exam-prep-ng/ | `donne4real/exam-prep-ng` |
+| 12 | PocketOffice | GitHub Pages | https://donne4real.github.io/PocketOffice/ | `donne4real/PocketOffice` |
+| 13 | Vocabulary App | Netlify | https://build-my-vocab.netlify.app | `donne4real/vocabulary_app` |
+| 14 | Nia The Investigator | Netlify | https://niatheinvestigator.netlify.app | *(no repo)* |
 
-**All 10 verified HTTP 200 on 23 Oct 2026.**
+**All 14 verified HTTP 200 on 9 Nov 2026.**
 
 **Excluded from public portfolio (deliberate):** custody schedule app, household budget analysis,
 religious/media material, personal/financial artifacts. These are not hiring signals.
@@ -121,7 +125,7 @@ they are simply not featured.
 
 ## Auto-deploy
 
-Both repos that deploy to Netlify run the same workflow (`.github/workflows/deploy.yml`):
+Three repos that deploy to Netlify run the same workflow (`.github/workflows/deploy.yml`):
 
 ```yaml
 on: push -> main
@@ -159,6 +163,29 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 | 7 | **Open Graph image** | Portfolio has no `og:image` — add a screenshot for link previews | 15 min |
 | 8 | **Resume PDF** | Aso Oke ships a whitepaper + field reports; assemble a 1-page PDF resume from `CAREER-ASSETS.md` | 1 hr |
 | 9 | ~~Delete `ars` + `report_analyzer`~~ | **Done 23 Oct 2026** — both permanently deleted from GitHub once the `delete_repo` scope was granted; local backups retained in the session workspace | — |
+| 10 | **Stale "Word Up" names in `bible-app`** | `package.json` name `wordup-africa-bible-reader`, `public/privacy.html` title, `public/sw.js` `CACHE_NAME = 'wordup-africa-bible-v10'` — the public rename did not reach them | 20 min |
+| 11 | **Store landing page has no repo** | `wordupbibleapp` is deployed but the source is not version-controlled — push it so the Play listing's website link has a source | 20 min |
+
+---
+
+## Deploying a directory to an existing Netlify site
+
+The Netlify CLI is the only deploy path on this machine. One trap:
+
+```powershell
+netlify deploy --prod --no-build --dir=. --site <site-id>
+```
+
+**`--no-build` is required.** Without it the CLI tries to auto-detect the build command, finds
+several candidates (it even suggested `remix vite:build` for a static folder), and opens an
+interactive `inquirer` prompt. A non-interactive session cannot answer it, and the CLI dies with
+`Error: Netlify CLI has terminated unexpectedly` / `ERR_USE_AFTER_CLOSE: readline was closed`.
+
+The CLI must also not be pointed at a folder whose parent contains a `package.json` — framework
+detection walks upward from the working directory. Deploy from a self-contained directory.
+
+Deploying to a site created through the API (`wordupbibleapp`) works with `--site <uuid>` — the
+UUID, not the site name.
 
 ---
 
@@ -167,8 +194,9 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 The hub has **no build step**, so assets are hand-edited and have no content hash. Two rules keep
 visitors off stale content:
 
-1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261024`.
+1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261109`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
+   Current value: `20261109` (bumped 9 Nov 2026 for the Bible rename + two new demos).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 
@@ -194,14 +222,16 @@ Editing only the **data** in `projects.js` needs no version bump — the file is
 $urls = @(
  'https://leye-ajibola.netlify.app',
  'https://bible-app.leyesapps.workers.dev',
+ 'https://bibleinafricanlanguages.netlify.app',
+ 'https://wordupbibleapp.netlify.app',
+ 'https://bible-verse-detector.netlify.app',
  'https://ngx-tracker.pages.dev',
  'https://cert-mastery.netlify.app',
+ 'https://certification-mastery.netlify.app',
+ 'https://powerball-predictor.netlify.app',
  'https://donne4real.github.io/exam-prep-ng/',
  'https://donne4real.github.io/PocketOffice/',
- 'https://donne4real.github.io/tappers-apprentice/',
- 'https://leyes-daily-plan.netlify.app',
  'https://build-my-vocab.netlify.app',
- 'https://bibleinafricanlanguages.netlify.app',
  'https://niatheinvestigator.netlify.app'
 )
 foreach ($u in $urls) {

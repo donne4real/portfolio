@@ -1,6 +1,6 @@
 # Project Index — Everything We've Built Together
 
-*Reconstructed 23 Oct 2026 from session history, the filesystem, git remotes, and project docs.*
+*Reconstructed 23 Oct 2026 from session history, the filesystem, git remotes, and project docs. Updated 9 Nov 2026.*
 *All paths are absolute on this machine (Windows).*
 
 ---
@@ -9,7 +9,7 @@
 
 | # | Project | Domain | Where it lives | Status |
 |---|---|---|---|---|
-| 1 | **Portfolio hub** | Public presence | `leye-ajibola.netlify.app` | Live — 9 demos, auto-deploy |
+| 1 | **Portfolio hub** | Public presence | `leye-ajibola.netlify.app` | Live — 12 demos, auto-deploy |
 | 2 | **Project Aso Oke** | ML/AI (flagship) | `OneDrive\Documents\aso-oke-project\` | Active — target ship **13 Dec 2026** |
 | 3 | **Master Development Plan** | Career governance | `OneDrive\Documents\Development PLan\` | Live: `Q4-2026-MASTER-PLAN.md` (v9) |
 | 4 | **Powerball Predictor** | Lottery / Python+Flask+JS | `donne4real/powerball-predictor` | Live: powerball-predictor.netlify.app |
@@ -27,11 +27,13 @@
 
 Static HTML/CSS/JS, no build step, no framework. Content lives in one file (`assets/js/projects.js`); edit it, push, live in ~45s via GitHub Actions → Netlify.
 
-**Live demos featured (9):** Word Up (Workers + Netlify) · NGX Tracker · Cert Mastery · Powerball Predictor · Exam Prep NG · PocketOffice · Vocabulary App · Nia The Investigator
+**Live demos featured (12):** Bible in African Languages (Workers web app · Google Play listing · Netlify build · store landing page) · Bible Verse Detector · NGX Tracker · Cert Mastery · Powerball Predictor · Exam Prep NG · PocketOffice · Vocabulary App · Nia The Investigator
 
 **Deliberately excluded:** Palmwine Tappers, Daily Plan (dropped by request 23 Oct), custody schedule, household budget, religious/personal material.
 
 **New in this build:** `cert-mastery.netlify.app` and `powerball-predictor.netlify.app` both deployed; `DocSummarization`, `ngx-tracker`, `daily-plan` made public; 27 repos given descriptions, topics and homepage URLs.
+
+**Updated 9 Nov 2026:** the Bible app was renamed from "Word Up" to **"Bible in African Languages"** across the hub, the profile README and the repo descriptions, and the Google Play listing was added as a first-class link. The Play listing's "website" field points at `https://wordupbibleapp.netlify.app/` — that URL was returning **404** until a static store landing page was deployed to the pre-registered Netlify site `wordupbibleapp` (site id `f42a82b1-…`) on 9 Nov 2026. Two further live sites were added to the hub: `bible-verse-detector.netlify.app` and the `certification-mastery.netlify.app` mirror of Cert Mastery.
 
 **Powerball Predictor** — the Python Flask app at `C:\Users\Public\powerball-predictor\` is now published as `donne4real/powerball-predictor` with two implementations: `python/` (original Flask + CLI) and `web/` (a faithful JavaScript port of the same engine, browser-only, no backend). The port was **verified by running both engines against the same 296-draw dataset and diffing every output** — frequency maps, hot/cold rankings, due-number ordering, pair counts, averages and the date span all match exactly.
 
@@ -297,13 +299,21 @@ Also has an Android/Capacitor build.
 
 **Path:** `Vibe Coding\Claude\bible-app\`  ·  **GitHub:** `donne4real/bible-app`
 **Live:** https://bible-app.leyesapps.workers.dev  (Cloudflare Workers; also Netlify + Capacitor Android)
+**Public name:** **Bible in African Languages** (renamed from "Word Up" on 9 Nov 2026 — internal stale names still present: `package.json` name `wordup-africa-bible-reader`, `public/privacy.html` title, `public/sw.js` `CACHE_NAME = 'wordup-africa-bible-v10'`)
+
+### Google Play (live)
+- **Listing:** https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader — v2.1.4, updated 10 Sep 2026, rating **4.6**, content rating Everyone / 10+, **10+ downloads**
+- **Package:** `com.wordupafrica.biblereader` (unchanged by the rename) · **Developer:** Leye Ajibola
+- **Privacy:** no data collected, nothing shared with third parties
+- **Listing website field:** `https://wordupbibleapp.netlify.app/` — was a 404 until the static store landing page was deployed 9 Nov 2026
 
 React + TypeScript + Tailwind. **22 translations** (Yoruba, Igbo, Hausa, Twi, Pidgin, Swahili, Amharic, Afrikaans, Shona, Ndebele, Ewe, Haitian Creole, Arabic RTL, French, KJV, WEB, ASV, BBE, YLT, NLT, AMP, NIV) · 19 bundled offline as static JSON · 6 reading fonts · 4 themes (Sepia/Light/Dark/OLED) · Zen mode · verse highlights, notes, bookmarks, cross-references · JSON export/import · 4 reading plans (NT-30, Psalms-30, Proverbs-30, Chronological-365) · whole-Bible + reference search with fuzzy suggestions · side-by-side/interlinear comparison · WhatsApp + Web Share API.
 
-**Related:** `bible-verse-detector-web\` · `donne4real/bible-verse-detector-web`
+**Related:** `bible-verse-detector-web\` · `donne4real/bible-verse-detector-web` · `donne4real/bible-verse-detector` (live: bible-verse-detector.netlify.app)
 
 ### Bible App engineering (`ROADMAP.md`, 4.9 KB, 9 Oct 2026)
 - **Architecture (25 Sep 2026):** `App.tsx` refactored into custom hooks — `useBibleNavigation`, `useStudyData`, `useSearch`, `usePersistedState`; components extracted — `BookPicker`, `VerseLine`, `ReadingPlanPanel`, `ErrorBoundary`; centralised constants, translations, storage keys
+- **Refactor (9 Nov 2026, commits `d68690a` → `20fd51f` → `9f33504`):** further hook extraction (`useComparison`, `useSettings`), code splitting, service-worker optimisation, and a fix that moves the `activeTrans` definition ahead of the `useEffect` that consumes it. A further local commit `4b06329` (highlight list view, colour filter, dates, underline style) is present in the working clone but not yet pushed.
 - **Testing:** Jest + Testing Library — **45 tests**
 - **A11y:** aria-labels on all interactive buttons; 15 s fetch timeout on remote Bible loads; JSDoc on all source files
 - **Engagement:** Verse of the Day (52 curated KJV verses, rotating), reading streaks (current/longest/total), verse card generator (`ShareCardModal`)
@@ -420,7 +430,6 @@ Sessions: Databricks Customer Academy passkey (14 Oct), restart VS Code kernel i
 ## 22. Creative writing
 
 - Story of Lee and Kemi's visit (23 Oct 2026)
-- Erotic stories (23 Oct 2026)
 
 ---
 
@@ -456,7 +465,8 @@ Sessions: Databricks Customer Academy passkey (14 Oct), restart VS Code kernel i
 | 14 Oct | Databricks Customer Academy passkey |
 | 15–16 Oct | Custody calendar folder; Aso Oke decks; Qwen tokens; desktop plan |
 | 1 Oct | `Q4-2026-MASTER-PLAN.md` v9 becomes the live plan |
-| 23 Oct | Story of Lee & Kemi; erotic stories; this index |
+| 23 Oct | Story of Lee & Kemi; this index |
+| 9 Nov | Bible app renamed "Bible in African Languages"; Google Play listing verified (4.6★, 10+ downloads); store landing page deployed to `wordupbibleapp`; hub + profile README updated |
 
 ---
 
@@ -464,6 +474,7 @@ Sessions: Databricks Customer Academy passkey (14 Oct), restart VS Code kernel i
 
 ```
 bible-app                    bible-app.leyesapps.workers.dev
+bible-verse-detector         bible-verse-detector.netlify.app
 bible-verse-detector-web     —
 exam-prep-ng                 —
 sermon-listener              —
@@ -483,6 +494,8 @@ powerball-predictor          powerball-predictor.netlify.app
 donne4real (profile)         github.com/donne4real
 cert-mastery                 cert-mastery.netlify.app
 ```
+
+**Netlify sites owned (5):** `leye-ajibola` (portfolio) · `cert-mastery` · `certification-mastery` (mirror) · `powerball-predictor` · `wordupbibleapp` (store landing page) · `bibleinafricanlanguages` (reader build) · `bible-verse-detector`
 
 ---
 
