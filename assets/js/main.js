@@ -43,9 +43,12 @@
   }
 
   function renderCard(p) {
-    const badge = p.status === "live"
-      ? '<span class="badge badge-live"><span class="pulse" aria-hidden="true"></span> Live</span>'
-      : "";
+    var badge = "";
+    if (p.status === "live") {
+      badge = '<span class="badge badge-live"><span class="pulse" aria-hidden="true"></span> Live</span>';
+    } else if (p.statusLabel) {
+      badge = '<span class="badge badge-soon">' + esc(p.statusLabel) + '</span>';
+    }
     return '<article class="card">' +
       "<h3>" + esc(p.title) + badge + "</h3>" +
       '<p class="card-kind">' + esc(p.kind) + "</p>" +

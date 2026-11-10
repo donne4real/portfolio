@@ -48,19 +48,64 @@ Static HTML/CSS/JS, no build step, no framework. Content lives in one file (`ass
 ## 1. Project Aso Oke — Yoruba AI tool (flagship)
 
 **Path:** `C:\Users\leyea\OneDrive\Documents\aso-oke-project\`
-**GitHub:** `github.com/donne4real/aso-oke`
+**GitHub:** `github.com/donne4real/aso-oke` · **Model adapter:** `huggingface.co/donne4real/aso-oke-madlad-lora`
 **Goal:** production Yoruba AI tool (translation + speech-to-text). Ship by **13 Dec 2026**
 (*moved from 22 Nov on 1 Oct 2026 — 3-week extension for a pre-registered model comparison*).
-**Plan window:** 4 Sep 2026 → 31 Dec 2026 (~19 weeks).
+**Plan window:** 9 Aug 2026 → 13 Dec 2026 (19 weeks), compressed schedule approved 9 Nov 2026.
+
+### Where it actually stands (9 Nov 2026)
+- **STT — done and selected.** Meta Omnilingual ASR LLM 1B, Apache 2.0, used as-is (no fine-tune).
+  **32.0%** WER on the FLEURS Yoruba test set (817 scored clips of 831 raw), **27.7%** on an
+  own-speaker holdout (6 clips, 2 speakers), **32.8%** on women's voices, p95 **4.12s** (gate <10s),
+  median 2.55s. Selected over CTC (35.0% vs 36.5% on validation). No fine-tune because
+  ~2.28B params × ~16 bytes ≈ 36 GB > a 15 GB T4 — scoping by memory arithmetic.
+- **Translation — ships with a disclaimer.** MADLAD-400-3B + LoRA on MAFAND (CC-BY-NC → non-commercial).
+  Phase 4 gate **BLEU ≥25 both directions: FAILED** — yo→en 11.74 BLEU / 33.79 chrF, en→yo 7.98 / 34.39.
+  Gate formally run 23 Oct; decision: ship with a prominent accuracy disclaimer.
+- **Translation latency gate — FAILED.** p95 **7.43s** vs a 3s gate (median 4.17s, slowest 11.48s;
+  28 Oct, Colab T4). Nov 9 beam-width test on Kaggle T4: yo→en p95 7.15s (beam 5) / 6.13s (beam 2) /
+  5.61s (beam 1) — greedy decoding also fails. ms per token only moved 134 → 116, so the bottleneck
+  is a fixed per-step cost, most likely 4-bit dequantisation, not beam search. en→yo p95 9.62s at
+  beam 5. **Unfixed — the no-compression test is 12 Nov** and must also check fp16 output sanity
+  (T5 models are fp16-unstable). Diagnosis, not a fix.
+- **Commercial line: PAUSED 9 Nov 2026, no restart date.** The Feb 2027 commercial gate no longer
+  applies. Current goal is a workable free launch on 13 Dec.
+- **My own LoRA fine-tune failed, and that verdict was published.** Epoch 1 scored 121.9% WER —
+  worse than not fine-tuning. Manual transcript inspection traced it to language auto-detection
+  guessing wrong for whole sentences; forcing the language gave a true 83.6% with no retraining.
+  8 epochs levelled off at 61.4%, 11.4 points short of the 50% ship bar, so the gate ruled it out
+  on 1 Oct and the un-tuned model was selected instead.
+- **Budget:** **$149.95 spent** (real billing records, not estimates), $157.30 after Deoti's fee,
+  ≈$217–242 expected by launch before hosting. Alert line $300, hard ceiling $400. Hosting choice
+  is due 12 Nov: ZeroGPU + HF PRO ≈$18 → total ≈$235–260 (under alert); T4 with sleep-timer saving
+  ≈$161 → ≈$378–403 (over alert); T4 always-on ≈$269 → ≈$486–511 (**over ceiling**).
+- **Recovery from the Lightning AI incident.** Lightning's 15 Oct security outage meant the trained
+  adapter existed in only one place. It was retrained from the identical recipe on Colab on 28 Oct,
+  reproduced the original scores (yo→en 11.95 BLEU), and is now live on the HF Hub with a second
+  copy on Google Drive.
+- **People:** translator 1 Ayodele Dedeke (100 sentences, done and checked). Translator 2 Deoti
+  Ogunleye's sheet went out 9 Nov, due 15 Nov. 8–12 native-speaker validators recruiting.
+- **Schedule (compressed, approved 9 Nov):** models freeze 13 Nov · app freezes as `v1.0-rc1`
+  29 Nov · go/no-go 12 Dec · **deploy 13 Dec**. Three spare days left (28 Nov, 5 Dec, 10 Dec).
 
 ### Key documents
 | File | Size | Purpose |
 |---|---|---|
-| `ASO-OKE-EXECUTION-PLAN.md` | — | Week-by-week delivery plan |
-| `ASO-OKE-REFERENCE.md` | — | Reference + License Audit Checklist |
-| `EXPLAIN-LIKE-IM-NEW.md` | — | "Explain like I'm new" walkthrough |
+| `ASO-OKE-EXECUTION-PLAN.md` | 100 KB | Day-by-day delivery plan (Weeks 0–15) |
+| `ASO-OKE-REFERENCE.md` | 222 KB | Technical reference + Decision Log |
+| `CAREER-ASSETS.md` | 69 KB | Résumé bullets, claim→evidence map, talk outline, social playbook |
+| `SCHEDULE-TO-DEC-13-DRAFT.md` | 10 KB | The compressed schedule, its cuts, risks and hosting budget (9 Nov) |
+| `COST-TRACKER.md` | 5.7 KB | Every dollar, with confirmed/estimated/user-reported status (9 Nov) |
+| `EXPLAIN-LIKE-IM-NEW.md` | 36 KB | Plain-language snapshot + running story |
+| `MODEL-CARD-SPEECH.md` / `MODEL-CARD-TRANSLATION.md` | 7 KB / 11 KB | Model cards — the shipped models and their licences |
+| `LICENCE-POLICY.md` | 5 KB | What may enter the commercial product |
+| `PRODUCT-SPEC.md` | 2.9 KB | Target users, quality bar, gates, success metrics |
+| `COMMERCIAL-QUALITY-ROADMAP.md` | 9 KB | Two-track plan (launch + commercial line) |
+| `ASO-OKE-WHITEPAPER.html` | 148 KB | The whitepaper |
+| `STT-EPOCH1-FIELD-REPORT.html` | 62 KB | The 121.9% → 83.6% investigation, in full |
+| `LORA-PILOT-FIELD-REPORT.html` | 65 KB | The translation LoRA pilot, in full |
+| `WEEKLY-SPRINT.md` | 145 KB | Single home for sprint planning + Weekly Review Log |
 | `AI-ENGINEER-CURRICULUM.md` | 62 KB | Learning plan mapped to real Aso Oke tasks |
-| `WEEKLY-SPRINT.md` | — | Single home for sprint planning + Weekly Review Log |
 | `ML-AI-ENGINEER-ROADMAP.md` | — | **Retired** → `superseded/` (Sep 17; merged into curriculum) |
 
 ### Directories
@@ -71,8 +116,11 @@ Static HTML/CSS/JS, no build step, no framework. Content lives in one file (`ass
 
 ### Audio-data pipeline (Day 28 → Day 57)
 - **FLEURS license audit** — `google/fleurs` (config `yo_ng`) confirmed **CC-BY-4.0**, cleared for use (checkpoint **PASS, 10 Sep 2026**)
-- **3 consented speakers** logged with metadata (name, age, gender, region, date, consent, file durations) — SPK01 Veronica Ajibola, Lagos, etc. All converted to **16 kHz mono WAV** with correct naming
+- **20 recorded own speakers** (11 → 20 by 18 Sep 2026), each logged with metadata (name, age, gender, region, date, file durations) and converted to **16 kHz mono WAV**. 13 women, 7 men.
+- **Consent status — read this before claiming anything about consent.** As of 30 Oct 2026 the user confirmed **all 20 speakers gave informal/verbal consent only; none were ever asked to sign anything**, by design at the free/volunteer stage. First *written* consent is a Track B task in `COMMERCIAL-QUALITY-ROADMAP.md` — and Track B is now paused. Do not describe these recordings as having consent forms.
+- **Transcripts** — corrected by Ayodele Dedeke: `corrected_transcripts_full.txt` holds 60 clips from 20 speakers, including all 39 women's-voice clips (13 speakers × 3). Scoring copy only; her original is untouched.
 - **LoRA fine-tuning** prepared — `final_lora_cell.txt`, `insert_lora_cell.py`, `cells_dump.txt` (in `Downloads\`); target modules `q/k/v/o_proj`, `gate/up/down_proj`, r=16, alpha=32
+- **Gender split of the evaluation** — Omnilingual scores 32.8% on the 39 women's clips vs 29.0% on the 21 men's, a 3.2-point gap, and 31.5% across all 20 speakers (60 clips / 2,856 reference words). The hardest script for everyone is the greetings one (55.1% women / 56.0% men) — a script-difficulty effect, not a gender effect.
 
 ### Notebooks
 - `Downloads\aso-oke-baselines.ipynb`
@@ -84,9 +132,9 @@ The **superseded** copy (`superseded/50-USERS-DEFINITION.md`, 30 Aug 2026) has a
 
 > **Signed:** Leye Ajibola, **Date:** September 5, 2026
 
-Definition: "50 users" = **≥50 unique users who completed at least one translation or speech-to-text request in the first 4 weeks post-launch** (Weeks 15–18, 22 Nov – 19 Dec 2026). "25 users" is the sunset bar.
+Definition: "50 users" = **≥50 unique users who completed at least one translation or speech-to-text request in the first 4 weeks post-launch** (Weeks 15–18, **13 Dec 2026 – 10 Jan 2027**). "25 users" is the sunset bar.
 
-*(Note: the ship date itself moved to 13 Dec 2026 on 1 Oct, so the post-launch window shifts with it.)*
+*(The post-launch window shifted with the ship date — it was originally 22 Nov – 19 Dec 2026 before the date moved to 13 Dec on 1 Oct. The observation window ends ~10 Jan 2027.)*
 
 ### Data-licence status (per-dataset, audited)
 
@@ -535,6 +583,7 @@ cert-mastery                 cert-mastery.netlify.app
 - Transcripts for the earliest (3 Jul) sessions could not be read; those entries come from filesystem artifacts only.
 - **`ars` and `report_analyzer`** (audit-report workstream) — **permanently deleted from GitHub on 23 Oct 2026** after the `delete_repo` scope was granted. Local backups retained: `_deleted_repo_backup/` in the session workspace.
 - **`ngx-tracker.pages.dev` is behind Cloudflare Access** as of 9 Nov 2026 — anonymous visitors get a "Sign in — Cloudflare Access" wall instead of the app. It still returns HTTP 200, so a status-code-only link check reports it as healthy. It is a private work in progress, and the portfolio still links to it: **open it up or drop the link before applying.**
+- **`donne4real/aso-oke` is effectively an empty repo.** It holds `.gitattributes` (LFS for `*.jsonl`) and one 132-byte LFS pointer at `corpus/v1.0-text-final.jsonl` — no README, no code, no docs, last pushed 18 Sep 2026. Yet it is the flagship card's "Repository" link, and the portfolio's own rule says every claim must link to its source. The project folder itself is **not** a git repo, so the real artefacts (`CAREER-ASSETS.md` Section 1 is a finished GitHub README draft; `ASO-OKE-WHITEPAPER.html`; `STT-EPOCH1-FIELD-REPORT.html`; `LORA-PILOT-FIELD-REPORT.html`) have never been published.
 
 ---
 

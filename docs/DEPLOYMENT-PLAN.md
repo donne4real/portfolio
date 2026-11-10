@@ -211,6 +211,7 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 | 13 | **Delete the Netlify Bible mirror** | `bibleinafricanlanguages.netlify.app` is retired — delete the Netlify site once nothing links to it | 5 min |
 | 14 | **Version the store landing page** | Same as #11 — source should live in a repo, not only in the session workspace | 20 min |
 | 15 | ⚠️ **`ngx-tracker` is behind Cloudflare Access** | The hub and the profile README link to `https://ngx-tracker.pages.dev`, but anonymous visitors get a **"Sign in — Cloudflare Access"** wall instead of the app. It still returns HTTP 200, so a plain link check will not catch it. Left as-is on 9 Nov 2026 because the app is a private work in progress — **before you apply, either remove the link from the hub and profile or open the app up** | 5 min |
+| 16 | ⚠️ **`donne4real/aso-oke` is an empty repo** | The flagship card's "Repository" link lands on a repo with only `.gitattributes` and one 132-byte LFS pointer — no README, no code. The finished README draft (`CAREER-ASSETS.md` Section 1), the whitepaper and both field reports are written but unpublished, and the project folder is not a git repo. A recruiter clicking the strongest card on the site currently finds nothing | 1 hr |
 
 ---
 
@@ -242,9 +243,9 @@ visitors off stale content:
 
 1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261109`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
-   Current value: `20261109c` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
-   figures, the DocSummarization removal, the Cloudflare Pages store page, and the removal of the
-   "Available for AI Engineer roles" badge).
+   Current value: `20261109d` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
+   figures, the DocSummarization removal, the Cloudflare Pages store page, the removal of the
+   "Available for AI Engineer roles" badge, and the Aso Oke card rewrite).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 

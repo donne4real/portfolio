@@ -9,18 +9,20 @@ const PROJECTS = {
     {
       title: "Aso Oke",
       kind: "Yoruba speech-to-text & translation",
-      status: "live",
+      status: "soon",
       statusLabel: "Ships 13 Dec 2026",
-      desc: "Closing a 92.6% word-error-rate gap on Yoruba. Custom diacritic normalizer, licensed data pipeline, and a pre-registered three-path ship gate — then the honest outcome: my own 8-epoch LoRA fine-tune failed the gate at 61.4%, and a zero-shot baseline won at 32.0%.",
-      tags: ["Python", "LoRA/PEFT", "Omnilingual ASR", "MADLAD-400", "FLORES-200", "W&B"],
+      desc: "Closing a 92.6% word-error-rate gap on Yoruba — and reporting the result that actually happened. My own 8-epoch LoRA fine-tune failed its pre-registered gate at 61.4%, so a zero-shot baseline that cleared the bar was selected at 32.0%. The translator failed both of its own gates too, and launches with a visible disclaimer instead of as a polished feature.",
+      tags: ["Python", "LoRA/PEFT", "Omnilingual ASR", "MADLAD-400", "FLORES-200", "Hugging Face", "W&B"],
       metrics: [
-        ["Test WER (817 clips)", "32.0%"],
-        ["Baseline WER", "92.6%"],
-        ["p95 latency, 1 clip / T4", "4.12s"],
-        ["Own-speaker holdout WER", "27.7%"]
+        ["STT test WER (817 clips)", "32.0%"],
+        ["Whisper baseline WER", "92.6%"],
+        ["Women's voices WER", "32.8%"],
+        ["Translation BLEU (gate 25)", "11.7 / 8.0"],
+        ["STT p95 latency, T4", "4.12s"]
       ],
       links: [
-        { label: "Repository", href: "https://github.com/donne4real/aso-oke" }
+        { label: "Repository", href: "https://github.com/donne4real/aso-oke" },
+        { label: "Model adapter", href: "https://huggingface.co/donne4real/aso-oke-madlad-lora", external: true }
       ]
     },
     {
