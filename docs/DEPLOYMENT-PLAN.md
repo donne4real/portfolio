@@ -241,11 +241,11 @@ UUID, not the site name.
 The hub has **no build step**, so assets are hand-edited and have no content hash. Two rules keep
 visitors off stale content:
 
-1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261109`.
+1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261110`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
-   Current value: `20261109d` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
-   figures, the DocSummarization removal, the Cloudflare Pages store page, the removal of the
-   "Available for AI Engineer roles" badge, and the Aso Oke card rewrite).
+   Current value: `20261110a` (bumped 10 Nov 2026 for the plain-language rewrite of all project
+   copy, metric labels and the hero, plus the new "In plain English" glossary section, and the
+   location correction to Virginia, USA).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 
@@ -265,6 +265,7 @@ Editing only the **data** in `projects.js` needs no version bump — the file is
 4. **Health-check the fleet before any interview.** A dead link in a live interview costs more than a missing project.
 5. **Keep the hub dependency-free.** If the portfolio is down, every project is still reachable.
 6. **Read the metric on the page that publishes it — do not scrape it.** The Play listing was once published as "4.6★" because a regex picked the first `aria-label="Rated N stars…"` out of the page — and that star belonged to a *similar app* in the carousel. The listing has no reviews, so it shows no rating at all. The fix was to open the listing and read the header: **50+ Downloads**, **Everyone**, no stars. A wrong number on a portfolio is worse than a missing one.
+7. **The hub is read by people who do not know AI.** Plain language is a *layer*, not a replacement. `kind`, `desc` and every metric label in `projects.js` are written for a non-engineer; the `tags` array keeps the technical vocabulary for engineers; the "In plain English" section 00 holds a 12-term glossary; the flagship prose defines terms inline. Rules that follow: plain language changes the **label**, never the **value** (32.0% stays 32.0%); plain language must never become a **false** claim ("six IT certifications" → "six professional certifications", because NCE and NCMHCE are not IT; "I shipped" → "was the one selected to ship", because Aso Oke launches 13 Dec 2026). Every new term gets a glossary entry on first appearance.
 
 ### Health check
 
