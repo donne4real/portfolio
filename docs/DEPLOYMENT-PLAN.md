@@ -88,21 +88,22 @@ assets/js/main.js     rendering + interactions
 | # | Project | Host | URL | Repo |
 |---|---|---|---|---|
 | 1 | Portfolio hub | Netlify | https://leye-ajibola.netlify.app | `donne4real/portfolio` |
-| 2 | Bible in African Languages (edge) | Cloudflare Workers | https://bible-app.leyesapps.workers.dev | `donne4real/bible-app` |
-| 3 | Bible in African Languages (netlify) | Netlify | https://bibleinafricanlanguages.netlify.app | `donne4real/bible-app` |
-| 4 | Bible in African Languages — Google Play | Google Play | https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader | `donne4real/bible-app` |
-| 5 | Bible in African Languages — store page | Netlify | https://wordupbibleapp.netlify.app | *(landing page)* |
-| 6 | Bible Verse Detector | Netlify | https://bible-verse-detector.netlify.app | `donne4real/bible-verse-detector` |
-| 7 | NGX Tracker | Cloudflare Pages | https://ngx-tracker.pages.dev | `donne4real/ngx-tracker` |
-| 8 | Cert Mastery | Netlify | https://cert-mastery.netlify.app | `donne4real/cert-mastery` |
-| 9 | Cert Mastery (mirror) | Netlify | https://certification-mastery.netlify.app | `donne4real/cert-mastery` |
-| 10 | Powerball Predictor | Netlify | https://powerball-predictor.netlify.app | `donne4real/powerball-predictor` |
-| 11 | Exam Prep NG | GitHub Pages | https://donne4real.github.io/exam-prep-ng/ | `donne4real/exam-prep-ng` |
-| 12 | PocketOffice | GitHub Pages | https://donne4real.github.io/PocketOffice/ | `donne4real/PocketOffice` |
-| 13 | Vocabulary App | Netlify | https://build-my-vocab.netlify.app | `donne4real/vocabulary_app` |
-| 14 | Nia The Investigator | Netlify | https://niatheinvestigator.netlify.app | *(no repo)* |
+| 2 | Bible in African Languages (primary) | Cloudflare Workers | https://bible-app.leyesapps.workers.dev | `donne4real/bible-app` |
+| 3 | Bible in African Languages — Google Play | Google Play | https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader | `donne4real/bible-app` |
+| 4 | Bible in African Languages — store page | Cloudflare Pages | https://wordupbibleapp.pages.dev | *(landing page)* |
+| 5 | Bible Verse Detector | Netlify | https://bible-verse-detector.netlify.app | `donne4real/bible-verse-detector` |
+| 6 | NGX Tracker | Cloudflare Pages | https://ngx-tracker.pages.dev | `donne4real/ngx-tracker` |
+| 7 | Cert Mastery | Netlify | https://cert-mastery.netlify.app | `donne4real/cert-mastery` |
+| 8 | Cert Mastery (mirror) | Netlify | https://certification-mastery.netlify.app | `donne4real/cert-mastery` |
+| 9 | Powerball Predictor | Netlify | https://powerball-predictor.netlify.app | `donne4real/powerball-predictor` |
+| 10 | Exam Prep NG | GitHub Pages | https://donne4real.github.io/exam-prep-ng/ | `donne4real/exam-prep-ng` |
+| 11 | PocketOffice | GitHub Pages | https://donne4real.github.io/PocketOffice/ | `donne4real/PocketOffice` |
+| 12 | Vocabulary App | Netlify | https://build-my-vocab.netlify.app | `donne4real/vocabulary_app` |
+| 13 | Nia The Investigator | Netlify | https://niatheinvestigator.netlify.app | *(no repo)* |
+| 14 | Bible in African Languages (legacy mirror) | Netlify | https://bibleinafricanlanguages.netlify.app | `donne4real/bible-app` — *retiring, not featured* |
+| 15 | Bible in African Languages — store page (legacy) | Netlify | https://wordupbibleapp.netlify.app | *(landing page)* — *stays live: the Play listing links here* |
 
-**All 14 verified HTTP 200 on 9 Nov 2026.**
+**All 15 verified HTTP 200 on 9 Nov 2026.**
 
 **Excluded from public portfolio (deliberate):** custody schedule app, household budget analysis,
 religious/media material, personal/financial artifacts. These are not hiring signals.
@@ -111,15 +112,56 @@ religious/media material, personal/financial artifacts. These are not hiring sig
 (`daily-plan`) — removed from the hub and the profile README. Both repos stay public on GitHub;
 they are simply not featured.
 
+**Dropped on request 9 Nov 2026:** DocSummarization — removed from the hub and the profile README.
+The repo stays public; it is just no longer a featured project.
+
 ---
 
 ## What is public vs private
 
 | Visibility | Repos |
 |---|---|
-| **Public, featured** | portfolio, donne4real (profile), aso-oke, bible-app, bible-verse-detector, bible-verse-detector-web, cert-mastery, datainsight, daily-plan, DocSummarization, exam-prep-ng, MarketSage-Analyzer, CombinedMarketAnalyzer, ETFAnalyzer, MutualFundAnalyzer, 100BaggerScreener, stock-market-analyzer, wagner_stock_screener, stock_screener, ngx-tracker, PocketOffice, tappers-apprentice, vocabulary_app, sermon-listener, ds4a_work, Amazon-Bedrock-Summarization-Long-Document-POC |
+| **Public, featured** | portfolio, donne4real (profile), aso-oke, bible-app, bible-verse-detector, bible-verse-detector-web, cert-mastery, datainsight, exam-prep-ng, MarketSage-Analyzer, CombinedMarketAnalyzer, ETFAnalyzer, MutualFundAnalyzer, 100BaggerScreener, stock-market-analyzer, wagner_stock_screener, stock_screener, ngx-tracker, PocketOffice, vocabulary_app, sermon-listener, ds4a_work, Amazon-Bedrock-Summarization-Long-Document-POC |
+| **Public, not featured** | daily-plan, tappers-apprentice, DocSummarization — dropped from the hub and profile README on request; repos stay public |
 | **Private (kept)** | stage_local_llm, qwen2.5-1.5b-model, data_insights |
 | **Deleted 23 Oct 2026** | ars, report_analyzer *(audit-report workstream — deleted after `delete_repo` scope was granted; local backup kept)* |
+
+---
+
+## Netlify → Cloudflare migration (in progress)
+
+**The situation:** "Word Up Bible Reader" and "Bible in African Languages" are the *same app*,
+deployed twice — the Cloudflare Worker at `bible-app.leyesapps.workers.dev` and a Netlify mirror at
+`bibleinafricanlanguages.netlify.app`. Cloudflare is the destination; the Netlify mirror is retired
+and is no longer featured in the portfolio.
+
+**What has already moved:**
+
+| Asset | From | To |
+|---|---|---|
+| The app itself | Netlify mirror | **already primary on Cloudflare Workers** (worker `bible-app`, D1 `bible-app-db`, edge function `bible-proxy`) |
+| Store landing page | `wordupbibleapp.netlify.app` | **`https://wordupbibleapp.pages.dev`** (Cloudflare Pages project `wordupbibleapp`) |
+
+**The Netlify store page stays live on purpose.** The Google Play listing's *website* field still
+points at `https://wordupbibleapp.netlify.app/`, so that deployment is what keeps the listing's link
+alive. Repoint the Play listing at `https://wordupbibleapp.pages.dev/`, then the Netlify copy can be
+deleted with no broken link.
+
+### Deploying the store page to Cloudflare Pages
+
+```powershell
+$WR  = 'C:\Users\leyea\OneDrive\Documents\Vibe Coding\Claude\bible-app\node_modules\wrangler\bin\wrangler.js'
+node $WR pages deploy <dir> --project-name=wordupbibleapp --branch=main --commit-dirty=true
+```
+
+Two wrangler traps on this machine:
+
+1. **The credential file lives at `%APPDATA%\xdg.config\.wrangler\config\default.toml`**, not at
+   `~\.wrangler`. A plain `wrangler` invocation resolves the *other* path and reports
+   "Not logged in … set CLOUDFLARE_API_TOKEN". Either export
+   `XDG_CONFIG_HOME=$env:APPDATA\xdg.config`, or read the `oauth_token` out of that file and pass it
+   as `CLOUDFLARE_API_TOKEN`. The OAuth token is valid for about an hour from login.
+2. **`wrangler` is not on PATH.** Use the binary inside the bible-app repo's `node_modules`.
 
 ---
 
@@ -163,8 +205,11 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 | 7 | **Open Graph image** | Portfolio has no `og:image` — add a screenshot for link previews | 15 min |
 | 8 | **Resume PDF** | Aso Oke ships a whitepaper + field reports; assemble a 1-page PDF resume from `CAREER-ASSETS.md` | 1 hr |
 | 9 | ~~Delete `ars` + `report_analyzer`~~ | **Done 23 Oct 2026** — both permanently deleted from GitHub once the `delete_repo` scope was granted; local backups retained in the session workspace | — |
-| 10 | **Stale "Word Up" names in `bible-app`** | `package.json` name `wordup-africa-bible-reader`, `public/privacy.html` title, `public/sw.js` `CACHE_NAME = 'wordup-africa-bible-v10'` — the public rename did not reach them | 20 min |
+| 10 | ~~Stale "Word Up" names in `bible-app`~~ | **Done 9 Nov 2026** — `public/privacy.html` title and body, and `public/sw.js` `CACHE_NAME` → `bible-in-african-languages-v12`. `package.json` and `capacitor.config.ts` were already correct | — |
 | 11 | **Store landing page has no repo** | `wordupbibleapp` is deployed but the source is not version-controlled — push it so the Play listing's website link has a source | 20 min |
+| 12 | **Repoint the Play listing's website field** | Still `https://wordupbibleapp.netlify.app/`; the migration target is `https://wordupbibleapp.pages.dev/`. After that, the Netlify store page can be deleted | 5 min |
+| 13 | **Delete the Netlify Bible mirror** | `bibleinafricanlanguages.netlify.app` is retired — delete the Netlify site once nothing links to it | 5 min |
+| 14 | **Version the store landing page** | Same as #11 — source should live in a repo, not only in the session workspace | 20 min |
 
 ---
 
@@ -196,7 +241,8 @@ visitors off stale content:
 
 1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261109`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
-   Current value: `20261109` (bumped 9 Nov 2026 for the Bible rename + two new demos).
+   Current value: `20261109b` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
+   figures, the DocSummarization removal and the Cloudflare Pages store page).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 
@@ -215,6 +261,7 @@ Editing only the **data** in `projects.js` needs no version bump — the file is
 3. **Every claim on the hub must link to its source.** Numbers come from the project's own reference docs, never from memory.
 4. **Health-check the fleet before any interview.** A dead link in a live interview costs more than a missing project.
 5. **Keep the hub dependency-free.** If the portfolio is down, every project is still reachable.
+6. **Read the metric on the page that publishes it — do not scrape it.** The Play listing was once published as "4.6★" because a regex picked the first `aria-label="Rated N stars…"` out of the page — and that star belonged to a *similar app* in the carousel. The listing has no reviews, so it shows no rating at all. The fix was to open the listing and read the header: **50+ Downloads**, **Everyone**, no stars. A wrong number on a portfolio is worse than a missing one.
 
 ### Health check
 
@@ -223,6 +270,7 @@ $urls = @(
  'https://leye-ajibola.netlify.app',
  'https://bible-app.leyesapps.workers.dev',
  'https://bibleinafricanlanguages.netlify.app',
+ 'https://wordupbibleapp.pages.dev',
  'https://wordupbibleapp.netlify.app',
  'https://bible-verse-detector.netlify.app',
  'https://ngx-tracker.pages.dev',

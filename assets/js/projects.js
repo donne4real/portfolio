@@ -39,20 +39,6 @@ const PROJECTS = {
       ]
     },
     {
-      title: "DocSummarization",
-      kind: "Document understanding",
-      status: "live",
-      desc: "PDF and multi-file summarisation behind a Streamlit interface, with separate handling for single documents, multi-file batches, and PDF-summary workflows.",
-      tags: ["Python", "Streamlit", "PDF", "NLP"],
-      metrics: [
-        ["Input modes", "PDF + multi-file"],
-        ["Interface", "Streamlit"]
-      ],
-      links: [
-        { label: "Repository", href: "https://github.com/donne4real/DocSummarization" }
-      ]
-    },
-    {
       title: "Exam Prep NG",
       kind: "Data pipeline & question banks",
       status: "live",
@@ -89,12 +75,12 @@ const PROJECTS = {
       title: "Bible in African Languages",
       kind: "Offline-first Bible reader",
       status: "live",
-      desc: "22 translations across African and world languages, 19 of them bundled as static JSON so it works with no connection. Study tools, four reading plans, comparison layouts, and WhatsApp sharing. Published on Google Play as an Android app, with no data collected and nothing shared with third parties.",
-      tags: ["React", "TypeScript", "Tailwind", "Cloudflare Workers", "Capacitor", "Jest"],
+      desc: "22 translations across African and world languages, 19 of them bundled as static JSON so it works with no connection. Study tools, four reading plans, comparison layouts, WhatsApp sharing, and a Cloudflare D1-backed sync for cross-device reading state. Published on Google Play as an Android app, with no data collected and nothing shared with third parties.",
+      tags: ["React", "TypeScript", "Tailwind", "Cloudflare Workers", "Cloudflare D1", "Capacitor", "Jest"],
       metrics: [
         ["Translations", "22"],
         ["Bundled offline", "19"],
-        ["Google Play rating", "4.6"],
+        ["Google Play downloads", "50+"],
         ["Test suite", "45 tests"],
         ["Reading plans", "4"]
       ],
@@ -102,7 +88,7 @@ const PROJECTS = {
         { label: "Repository", href: "https://github.com/donne4real/bible-app" },
         { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader", external: true },
         { label: "Web app", href: "https://bible-app.leyesapps.workers.dev", external: true },
-        { label: "Store page", href: "https://wordupbibleapp.netlify.app", external: true }
+        { label: "Store page", href: "https://wordupbibleapp.pages.dev", external: true }
       ]
     },
     {
@@ -209,7 +195,7 @@ const PROJECTS = {
     {
       name: "Bible in African Languages — Google Play",
       url: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader",
-      desc: "Published Android app, 4.6 stars. No data collected, nothing shared.",
+      desc: "Published Android app, 50+ downloads on Google Play. No data collected, nothing shared.",
       state: "up"
     },
     {
@@ -249,15 +235,9 @@ const PROJECTS = {
       state: "up"
     },
     {
-      name: "Bible in African Languages — Netlify build",
-      url: "https://bibleinafricanlanguages.netlify.app",
-      desc: "The same reader on the Netlify pipeline.",
-      state: "up"
-    },
-    {
       name: "Bible in African Languages — Store page",
-      url: "https://wordupbibleapp.netlify.app",
-      desc: "The landing page the Google Play listing points to.",
+      url: "https://wordupbibleapp.pages.dev",
+      desc: "The store landing page, hosted on Cloudflare Pages.",
       state: "up"
     },
     {
