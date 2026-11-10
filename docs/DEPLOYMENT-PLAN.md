@@ -242,8 +242,9 @@ visitors off stale content:
 
 1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261109`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
-   Current value: `20261109b` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
-   figures, the DocSummarization removal and the Cloudflare Pages store page).
+   Current value: `20261109c` (bumped 9 Nov 2026 for the Bible rename, the corrected Play Store
+   figures, the DocSummarization removal, the Cloudflare Pages store page, and the removal of the
+   "Available for AI Engineer roles" badge).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 
