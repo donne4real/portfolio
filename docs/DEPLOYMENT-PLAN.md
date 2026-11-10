@@ -243,9 +243,9 @@ visitors off stale content:
 
 1. `index.html` references assets with a version string — `assets/js/projects.js?v=20261110`.
    **Bump `?v=` in all three references whenever you edit `style.css`, `main.js` or `projects.js`.**
-   Current value: `20261110a` (bumped 10 Nov 2026 for the plain-language rewrite of all project
-   copy, metric labels and the hero, plus the new "In plain English" glossary section, and the
-   location correction to Virginia, USA).
+   Current value: `20261110b` (bumped 10 Nov 2026 for the plain-language rewrite of all project
+   copy, metric labels and the hero, plus the new "In plain English" glossary section, the
+   location correction to Virginia, USA, and the CISSP/Security+/AWS certification line).
 2. `netlify.toml` sets `Cache-Control: public, max-age=0, must-revalidate` on `/assets/*` as a
    second line of defence.
 
