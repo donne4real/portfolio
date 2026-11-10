@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261109d">
+<link rel="stylesheet" href="assets/css/style.css?v=20261110a">
 </head>
 <body>
 
@@ -57,9 +57,13 @@
     <div class="wrap hero-inner">
       <h1>I build AI that works on&nbsp;languages<br>the world forgot.</h1>
       <p class="lede">
-        I'm a BI Architect moving into AI engineering. I build production
-        speech-to-text, translation and local-LLM systems — and I measure them
-        against pre-registered gates before I call anything finished.
+        I'm a BI Architect moving into AI engineering. I build AI that listens to speech,
+        translates languages, and runs on your own machine — and I write down the pass mark
+        <em>before</em> I start, so the result decides whether it ships.
+      </p>
+      <p class="lede-note">
+        New to this side of AI? <a href="#plain">Start with the plain-English guide</a> —
+        every term on this page is explained there.
       </p>
 
       <div class="hero-cta">
@@ -73,15 +77,80 @@
       <dl class="stats">
         <div class="stat">
           <dt>92.6% &rarr; 32.0%</dt>
-          <dd>Whisper's word-error rate on Yoruba, then the model that beat it</dd>
+          <dd>How wrong the best speech tool was on Yoruba — then the number my selected model reached</dd>
         </div>
         <div class="stat">
           <dt>22</dt>
-          <dd>Bible translations shipped in an offline-first reader</dd>
+          <dd>Bible translations in a reader that works with no internet connection</dd>
         </div>
         <div class="stat">
           <dt>$400</dt>
-          <dd>Hard compute ceiling for a production AI launch</dd>
+          <dd>Total budget cap for shipping a working AI product — not exceeded</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ PLAIN ENGLISH ============ -->
+  <section class="section section-alt" id="plain">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker">00 &mdash; In plain English</p>
+        <h2>How to read this page</h2>
+        <p class="section-sub">
+          AI work comes with its own vocabulary. Here are the words that appear below,
+          translated. If you only read one thing on this site, read this.
+        </p>
+      </div>
+
+      <dl class="glossary">
+        <div>
+          <dt>Word error rate (WER)</dt>
+          <dd>How many words a speech-to-text tool gets wrong. 0% is a perfect transcript.</dd>
+        </div>
+        <div>
+          <dt>Fine-tuning</dt>
+          <dd>Teaching an existing AI model extra lessons on your own data, rather than building one from scratch.</dd>
+        </div>
+        <div>
+          <dt>Pre-registered gate</dt>
+          <dd>A pass mark written down <em>before</em> the work starts, so the result can't be argued with afterwards.</dd>
+        </div>
+        <div>
+          <dt>Latency (p95)</dt>
+          <dd>How long the slowest 1-in-20 requests take. Lower is better; p95 means 95% of requests beat it.</dd>
+        </div>
+        <div>
+          <dt>Inference</dt>
+          <dd>When a trained model actually answers a question. Training is the homework; inference is the exam.</dd>
+        </div>
+        <div>
+          <dt>Local / on-device AI</dt>
+          <dd>A model that runs on your own computer instead of someone's server, so your data never leaves the machine.</dd>
+        </div>
+        <div>
+          <dt>BLEU</dt>
+          <dd>The standard 0&ndash;100 score for "how close is this translation to a human's?"</dd>
+        </div>
+        <div>
+          <dt>Offline-first</dt>
+          <dd>The app works with no internet connection, and only goes online if you ask it to.</dd>
+        </div>
+        <div>
+          <dt>CI/CD</dt>
+          <dd>Automatic checks that run every time code is published, so a broken release can't go live.</dd>
+        </div>
+        <div>
+          <dt>Retrieval (RAG)</dt>
+          <dd>Looking through your own documents first, then answering using what it found.</dd>
+        </div>
+        <div>
+          <dt>Licence audit</dt>
+          <dd>Checking you are allowed to use a dataset before you build on it &mdash; not after you launch.</dd>
+        </div>
+        <div>
+          <dt>Baseline</dt>
+          <dd>The number you had before you started, so any improvement is real rather than imagined.</dd>
         </div>
       </dl>
     </div>
@@ -94,9 +163,8 @@
         <p class="section-kicker">01 &mdash; Flagship</p>
         <h2>Closing the AI gap for Yoruba</h2>
         <p class="section-sub">
-          State-of-the-art speech recognition scores a 92.6% word-error rate on Yoruba —
-          essentially unusable. This project fixes that, on a $400 budget, with every number
-          documented in public.
+          The best speech-recognition tool available gets Yoruba badly wrong — 92.6% of words.
+          This project closes that gap on a $400 budget, with every number documented in public.
         </p>
       </div>
 
@@ -104,34 +172,45 @@
         <div class="feature-body">
           <div class="feature-head">
             <h3>Aso Oke</h3>
-            <span class="badge badge-live"><span class="pulse" aria-hidden="true"></span> In development</span>
+            <span class="badge badge-soon">In development</span>
           </div>
           <p class="feature-tag">Yoruba speech-to-text &amp; translation &middot; Solo, built in public</p>
 
           <p>
-            I measured the baseline first, then built against it: a custom Yoruba diacritic
-            normalizer validated on 200 real corpus sentences, a licensed data pipeline
-            (FLEURS, MAFAND, Tatoeba, FLORES-200), and a pre-registered three-path ship gate
-            written <em>before</em> any result existed.
+            I measured the starting point first, then built against it: a custom text-cleaning
+            tool that keeps Yoruba spelling consistent (tone marks change a word's meaning, so
+            <code>ẹ</code> and <code>e</code> are different letters, and it was checked against
+            200 real sentences), a data pipeline where every source was licence-checked before
+            use, and a pass mark written down <em>before</em> any result existed — so I couldn't
+            move the goalposts afterwards.
           </p>
           <p>
-            The most interesting outcome is the one that didn't go to plan. An 8-epoch LoRA
-            fine-tune of Whisper large-v3 reached 61.4% WER and <strong>failed</strong> the
-            pre-registered gate. Meta's Omnilingual ASR LLM 1B, used with zero Yoruba-specific
-            training, scored <strong>32.0%</strong> — and shipped. I chose the baseline over my
-            own model, and documented exactly why.
+            The most interesting outcome is the one that didn't go to plan. I trained the
+            industry-standard speech model myself — eight passes over Yoruba speech — and it
+            still got <strong>61.4% of words wrong</strong>, failing the pass mark I'd set.
+            A model I'd never trained on, used exactly as its makers released it, got
+            <strong>32.0%</strong>, and was the one selected to ship. I chose it over my own
+            model and documented exactly why.
+          </p>
+          <p>
+            The translator was less lucky. It failed both of its own gates — accuracy
+            (<strong>11.7 out of 100</strong> against a pass mark of 25) and speed
+            (<strong>7.4 seconds</strong> against a 3-second limit) — so it launches with a
+            visible disclaimer rather than pretending to be finished. One cheap test ruled out
+            the obvious suspect and pointed at the real one; the fix is scheduled, not claimed.
           </p>
 
           <ul class="facts">
-            <li><strong>32.0%</strong> WER on held-out FLEURS test (817 clips) vs a 92.6% baseline</li>
-            <li><strong>27.7%</strong> WER on own-speaker holdout — evidence the score isn't inflated by data leakage</li>
-            <li><strong>4.12s</strong> p95 latency for one clip on a single T4</li>
-            <li><strong>60.6</strong> points better than the un-fine-tuned baseline</li>
+            <li><strong>32.0%</strong> of words wrong on a held-out test set (817 clips), against 92.6% for the best tool available</li>
+            <li><strong>27.7%</strong> on speakers it had never heard — the score isn't inflated by data it had already seen</li>
+            <li><strong>32.8%</strong> on women's voices — the standard test set is entirely male, so I measured this separately</li>
+            <li><strong>4.12s</strong> to answer in 95% of requests, on one rented graphics card</li>
+            <li><strong>60.6</strong> points better than the model I started from</li>
           </ul>
 
           <div class="feature-actions">
             <a class="btn btn-sm btn-primary" href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">View the repo</a>
-            <a class="btn btn-sm btn-ghost" href="https://github.com/donne4real/aso-oke/blob/main/ASO-OKE-REFERENCE.md" target="_blank" rel="noopener">Read the build log</a>
+            <a class="btn btn-sm btn-ghost" href="https://huggingface.co/donne4real/aso-oke-madlad-lora" target="_blank" rel="noopener">See the trained model</a>
             <span class="meta-note">Ships 13 Dec 2026</span>
           </div>
         </div>
@@ -145,9 +224,9 @@
           </ul>
           <h4 class="mt">Discipline</h4>
           <ul class="plain-list">
-            <li>Pre-registered quality gates &amp; kill criteria</li>
-            <li>Per-dataset licence audits</li>
-            <li>Native-speaker validator panel</li>
+            <li>Pass marks and kill criteria, written down first</li>
+            <li>Every dataset licence-checked before use</li>
+            <li>Native-speaker validator panel before launch</li>
             <li>Public decision log</li>
           </ul>
         </aside>
@@ -160,10 +239,10 @@
     <div class="wrap">
       <div class="section-head">
         <p class="section-kicker">02 &mdash; AI &amp; Machine Learning</p>
-        <h2>Models, retrieval and evaluation</h2>
+        <h2>AI that does real work</h2>
         <p class="section-sub">
-          Systems that do real inference work: local models, retrieval pipelines,
-          document understanding, and question banks generated at scale.
+          Models that actually run: speech that listens, documents that get read and summarised,
+          and test material written by a script instead of by hand.
         </p>
       </div>
       <div class="grid" id="gridAiml"></div>
@@ -177,8 +256,8 @@
         <p class="section-kicker">03 &mdash; Engineering</p>
         <h2>Shipped products</h2>
         <p class="section-sub">
-          Deployed, tested applications — from offline-first React PWAs to
-          CI/CD-pipelineed web apps with validated data.
+          Deployed, tested applications you can open right now — from a Bible reader that works
+          with no internet connection, to study apps and stock trackers.
         </p>
       </div>
       <div class="grid" id="gridEng"></div>
@@ -212,16 +291,17 @@
           <p>
             My operating principles are simple. <strong>Define the bar before you build.</strong>
             Write down the threshold that makes a thing shippable, then let the result decide.
-            <strong>Licence before you baseline.</strong> Half my architecture decisions on Aso Oke
-            came from licence audits, and one of them (NLLB-200 &rarr; MADLAD-400) would have
-            permanently blocked charging for the product if I'd found it at launch instead of in Week 1.
-            <strong>Say what doesn't work.</strong> The model cards and field reports are as explicit
-            about the gaps as the wins.
+            <strong>Check the licence before you build the baseline.</strong> Half my architecture
+            decisions on Aso Oke came from checking what I was allowed to use, and one of them —
+            swapping one translation model for another — would have permanently blocked charging
+            for the product if I'd found it at launch instead of in Week 1.
+            <strong>Say what doesn't work.</strong> The published model cards and field reports
+            are as explicit about the gaps as the wins.
           </p>
           <p>
-            I'm currently deep in low-resource speech for Yoruba, and building local-LLM tooling that
-            runs entirely on-device — because privacy, cost and offline capability shouldn't be
-            afterthoughts.
+            I'm currently deep in speech recognition for languages that big tech has almost no data
+            for — Yoruba is one of them — and building AI tools that run entirely on your own
+            machine, because privacy, cost and working offline shouldn't be afterthoughts.
           </p>
         </div>
 
@@ -242,7 +322,7 @@
           <ul class="plain-list">
             <li><strong>Building</strong> — Aso Oke, shipping 13 Dec 2026</li>
             <li><strong>Learning</strong> — AWS AI &amp; ML Scholars Nanodegree</li>
-            <li><strong>Based in</strong> — Nigeria, working remotely</li>
+            <li><strong>Based in</strong> — Virginia, USA, working remotely</li>
           </ul>
         </div>
         <div class="panel">
@@ -261,7 +341,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <p>&copy; <span id="year">2026</span> Leye Ajibola. Built and deployed from Nigeria.</p>
+    <p>&copy; <span id="year">2026</span> Leye Ajibola. Built and deployed from Virginia.</p>
     <p class="footer-note">
       Every number on this site is measured, not estimated.
       Source for all claims: <a href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">github.com/donne4real/aso-oke</a>
@@ -269,7 +349,7 @@
   </div>
 </footer>
 
-<script src="assets/js/projects.js?v=20261109d"></script>
-<script src="assets/js/main.js?v=20261109d"></script>
+<script src="assets/js/projects.js?v=20261110a"></script>
+<script src="assets/js/main.js?v=20261110a"></script>
 </body>
 </html>

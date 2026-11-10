@@ -120,6 +120,16 @@ h1 {
   line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; max-width: 18ch;
 }
 .lede { margin: 0 0 34px; font-size: clamp(1.02rem, 1.6vw, 1.16rem); color: var(--ink-soft); max-width: 60ch; }
+.lede-note { margin: -24px 0 34px; font-size: 13.5px; color: var(--dim); max-width: 60ch; }
+.lede-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.feature-body code, .about-copy code { font-family: var(--mono); font-size: .9em; color: var(--accent); }
+
+/* ---------- plain-English glossary ---------- */
+.glossary { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); gap: 20px 32px; margin: 0; }
+.glossary > div { border-top: 1px solid var(--line-soft); padding-top: 14px; }
+.glossary dt { font-size: 14.5px; font-weight: 620; color: var(--ink); margin-bottom: 5px; letter-spacing: -0.01em; }
+.glossary dd { margin: 0; font-size: 13.8px; color: var(--ink-soft); line-height: 1.55; }
+.glossary dd em { color: var(--ink); font-style: italic; }
 
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 62px; }
 
