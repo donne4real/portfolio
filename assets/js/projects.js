@@ -101,7 +101,7 @@ const PROJECTS = {
       title: "Cert Mastery",
       kind: "Exam practice app",
       status: "live",
-      desc: "Practise for six professional certifications on your phone — 300 questions each with explanations, study notes and timed tests. It installs to your home screen and works with no signal.",
+      desc: "Practise for six professional certifications on your phone — 300 questions each with explanations, study notes and timed tests. Three of them (CISSP, Security+ and AWS) are the ones I am working towards myself. It installs to your home screen and works with no signal.",
       tags: ["JavaScript", "PWA", "AWS", "CISSP"],
       metrics: [
         ["Certifications", "6"],
