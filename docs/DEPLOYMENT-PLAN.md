@@ -210,6 +210,7 @@ step, and the workflow file is visible in the repo — which is itself a portfol
 | 12 | **Repoint the Play listing's website field** | Still `https://wordupbibleapp.netlify.app/`; the migration target is `https://wordupbibleapp.pages.dev/`. After that, the Netlify store page can be deleted | 5 min |
 | 13 | **Delete the Netlify Bible mirror** | `bibleinafricanlanguages.netlify.app` is retired — delete the Netlify site once nothing links to it | 5 min |
 | 14 | **Version the store landing page** | Same as #11 — source should live in a repo, not only in the session workspace | 20 min |
+| 15 | ⚠️ **`ngx-tracker` is behind Cloudflare Access** | The hub and the profile README link to `https://ngx-tracker.pages.dev`, but anonymous visitors get a **"Sign in — Cloudflare Access"** wall instead of the app. It still returns HTTP 200, so a plain link check will not catch it. Left as-is on 9 Nov 2026 because the app is a private work in progress — **before you apply, either remove the link from the hub and profile or open the app up** | 5 min |
 
 ---
 
@@ -284,10 +285,15 @@ $urls = @(
 )
 foreach ($u in $urls) {
   try { $r = Invoke-WebRequest $u -TimeoutSec 20 -UseBasicParsing
-        "{0,-48} {1}" -f $u, $r.StatusCode }
+        $wall = if ($r.Content -match 'Cloudflare Access') { 'LOGIN WALL' } else { '' }
+        "{0,-48} {1} {2}" -f $u, $r.StatusCode, $wall }
   catch { "{0,-48} DEAD" -f $u }
 }
 ```
+
+**Check the body, not just the status code.** A site behind Cloudflare Access returns `200` with a
+sign-in page, so a status-only health check calls it healthy. The `LOGIN WALL` marker above is what
+catches that — it is the check that would have flagged `ngx-tracker` on 9 Nov 2026.
 
 ---
 

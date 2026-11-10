@@ -534,6 +534,7 @@ cert-mastery                 cert-mastery.netlify.app
 - `Power Predictor App.docx` body text is 3 embedded PNG screenshots; no LibreOffice/Word available to render, so the screenshots were read directly as images.
 - Transcripts for the earliest (3 Jul) sessions could not be read; those entries come from filesystem artifacts only.
 - **`ars` and `report_analyzer`** (audit-report workstream) — **permanently deleted from GitHub on 23 Oct 2026** after the `delete_repo` scope was granted. Local backups retained: `_deleted_repo_backup/` in the session workspace.
+- **`ngx-tracker.pages.dev` is behind Cloudflare Access** as of 9 Nov 2026 — anonymous visitors get a "Sign in — Cloudflare Access" wall instead of the app. It still returns HTTP 200, so a status-code-only link check reports it as healthy. It is a private work in progress, and the portfolio still links to it: **open it up or drop the link before applying.**
 
 ---
 
