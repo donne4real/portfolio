@@ -1,7 +1,8 @@
 # Project Index — Everything We've Built Together
 
-*Reconstructed 23 Oct 2026 from session history, the filesystem, git remotes, and project docs. Updated 9 Nov 2026.*
+*Reconstructed 23 Oct 2026 from session history, the filesystem, git remotes, and project docs. Updated 10 Nov 2026.*
 *All paths are absolute on this machine (Windows).*
+*Author location: **Virginia, USA** — working remotely. (Corrected 10 Nov 2026; earlier drafts said Nigeria.)*
 
 ---
 
@@ -36,6 +37,10 @@ Static HTML/CSS/JS, no build step, no framework. Content lives in one file (`ass
 **Updated 9 Nov 2026:** the Bible app was renamed from "Word Up" to **"Bible in African Languages"** across the hub, the profile README and the repo descriptions, and the Google Play listing was added as a first-class link. The Play listing's "website" field points at `https://wordupbibleapp.netlify.app/` — that URL was returning **404** until a static store landing page was deployed on 9 Nov 2026. Two further live sites were added to the hub: `bible-verse-detector.netlify.app` and the `certification-mastery.netlify.app` mirror of Cert Mastery.
 
 **The 4.6★ claim was removed.** An earlier draft asserted the Play listing was rated 4.6. It is not: the listing shows **50+ downloads**, content rating **Everyone**, and **no star rating at all** — the app has no reviews, so Play omits the widget. The "4.6" was mis-parsed out of Play's *similar-apps carousel* (that 4.6 belongs to LANDR Audio). Corrected on the hub, the profile README, the store page and this index on 9 Nov 2026.
+
+**Plain-language pass (10 Nov 2026).** The hub and the profile README were rewritten so they read sensibly to someone with no AI-engineering background. Mechanism: **the technical detail moves down a layer, it does not disappear.** Project descriptions and metric labels on the hub became plain-English; the existing `tags` array carries the technical vocabulary for engineers; a new section 00 ("In plain English") holds a 12-term glossary (WER, fine-tuning, pre-registered gate, p95 latency, inference, local/on-device AI, BLEU, offline-first, CI/CD, retrieval/RAG, licence audit, baseline); the flagship prose gained inline definitions for diacritic normalizer, BLEU and p95. The profile README gained a "New to AI? Start here" block. Asset version bumped `20261109d` → `20261110a` so browsers pick up the new CSS/JS.
+
+**Location corrected (10 Nov 2026).** Virginia, USA — not Nigeria. Fixed on the hub hero, the hub footer, the profile README ("Based in — Virginia, USA, working remotely") and this index header.
 
 **Netlify → Cloudflare migration (in progress):** "Word Up Bible Reader" and "Bible in African Languages" are the *same app*, deployed twice — the Cloudflare Worker at `bible-app.leyesapps.workers.dev` and a Netlify mirror at `bibleinafricanlanguages.netlify.app`. Cloudflare is the destination. The store landing page was therefore also published to Cloudflare Pages at `https://wordupbibleapp.pages.dev` (project `wordupbibleapp`), and the Netlify copy at `wordupbibleapp.netlify.app` was left live so the Play listing's website link never breaks while the listing is repointed. The Netlify mirror of the app itself is no longer featured in the portfolio.
 
