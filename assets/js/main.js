@@ -5,17 +5,29 @@
 (function () {
   "use strict";
 
-  /* ---------- renderers ---------- */
+  /* ---------- helpers ---------- */
 
   function esc(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
 
-  function renderTags(tags) {
+  function byId(id) {
+    var el = document.getElementById(id);
+    return el ? el.innerHTML : "";
+  }
+
+  function setHtml(id, html) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+
+  /* ---------- renderers ---------- */
+
+  function renderTags(tags, big) {
     if (!tags || !tags.length) return "";
-    return '<ul class="tags">' +
+    return '<ul class="tags' + (big ? " tags-lg" : "") + '">' +
       tags.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") +
       "</ul>";
   }
@@ -33,10 +45,7 @@
     if (!links || !links.length) return "";
     return '<div class="card-actions">' +
       links.map(function (l) {
-        const ext = l.external
-          ? ' target="_blank" rel="noopener"'
-          : ' target="_blank" rel="noopener"';
-        return '<a href="' + esc(l.href) + '"' + ext + '>' +
+        return '<a href="' + esc(l.href) + '" target="_blank" rel="noopener">' +
           esc(l.label) + ' <span class="arrow" aria-hidden="true">&rarr;</span></a>';
       }).join("") +
       "</div>";
@@ -47,7 +56,7 @@
     if (p.status === "live") {
       badge = '<span class="badge badge-live"><span class="pulse" aria-hidden="true"></span> Live</span>';
     } else if (p.statusLabel) {
-      badge = '<span class="badge badge-soon">' + esc(p.statusLabel) + '</span>';
+      badge = '<span class="badge badge-soon">' + esc(p.statusLabel) + "</span>";
     }
     return '<article class="card">' +
       "<h3>" + esc(p.title) + badge + "</h3>" +
@@ -60,7 +69,7 @@
   }
 
   function renderDemo(d) {
-    const pending = d.state !== "up";
+    var pending = d.state !== "up";
     return '<a class="demo" href="' + esc(d.url) + '" target="_blank" rel="noopener">' +
       '<div class="demo-top">' +
         '<span class="demo-name">' + esc(d.name) + "</span>" +
@@ -73,6 +82,22 @@
       "</a>";
   }
 
+  function renderStat(s) {
+    return '<div class="stat"><dt>' + esc(s.value) + "</dt><dd>" +
+      '<span class="stat-label">' + esc(s.label) + "</span>" +
+      '<span class="stat-note">' + esc(s.note) + "</span>" +
+      "</dd></div>";
+  }
+
+  function renderWriting(w) {
+    return '<article class="card">' +
+      "<h3>" + esc(w.title) + "</h3>" +
+      '<p class="card-kind">' + esc(w.kind) + "</p>" +
+      "<p>" + esc(w.desc) + "</p>" +
+      renderLinks(w.links) +
+      "</article>";
+  }
+
   function mount(sel, items, fn) {
     var el = document.querySelector(sel);
     if (!el) return;
@@ -82,13 +107,29 @@
   /* ---------- boot ---------- */
 
   function init() {
-    mount("#gridAiml", PROJECTS.aiml, renderCard);
+    mount("#gridAI", PROJECTS.ai, renderCard);
+    mount("#gridFaith", PROJECTS.faith, renderCard);
     mount("#gridEng", PROJECTS.engineering, renderCard);
+    mount("#gridFinance", PROJECTS.finance, renderCard);
+    mount("#gridProductivity", PROJECTS.productivity, renderCard);
+    mount("#gridLearning", PROJECTS.learning, renderCard);
+    mount("#gridHealth", PROJECTS.health, renderCard);
     mount("#gridDemos", PROJECTS.demos, renderDemo);
+    mount("#gridWriting", WRITING, renderWriting);
+    mount("#statsGrid", STATS, renderStat);
+
+    /* Section headings driven from the data file so they never drift. */
+    Object.keys(SECTIONS).forEach(function (key) {
+      var s = SECTIONS[key];
+      setHtml("kicker-" + key, s.kicker);
+      setHtml("title-" + key, s.title);
+      setHtml("sub-" + key, s.sub);
+    });
 
     var year = document.getElementById("year");
     if (year) year.textContent = new Date().getFullYear();
 
+    /* Nav */
     var toggle = document.getElementById("navToggle");
     var mobile = document.getElementById("navMobile");
     if (toggle && mobile) {

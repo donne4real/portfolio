@@ -32,3 +32,15 @@
   to = "https://github.com/donne4real/aso-oke"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/resume"
+  to = "/resume.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cv"
+  to = "/resume.html"
+  status = 301
+  force = true

@@ -4,23 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leye Ajibola — AI Engineer</title>
-<meta name="description" content="AI Engineer building production speech-to-text, translation and local-LLM systems. Shipping a Yoruba AI tool to close a 92.6% word-error-rate gap.">
+<meta name="description" content="AI Engineer building production speech-to-text, translation and local-LLM systems. 25 shipped projects across AI, African languages, finance and education. Shipping a Yoruba AI tool to close a 92.6% word-error-rate gap.">
 <meta name="author" content="Leye Ajibola">
 <meta name="theme-color" content="#0A0B0D">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Leye Ajibola — AI Engineer">
-<meta property="og:description" content="Production speech-to-text, translation and local-LLM systems. Closing the AI gap for Yoruba.">
+<meta property="og:description" content="Production speech-to-text, translation and local-LLM systems. 25 shipped projects. Closing the AI gap for Yoruba.">
 <meta property="og:url" content="https://leye-ajibola.netlify.app">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Leye Ajibola — AI Engineer">
-<meta name="twitter:description" content="Production speech-to-text, translation and local-LLM systems.">
+<meta name="twitter:description" content="Production speech-to-text, translation and local-LLM systems. 25 shipped projects.">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261110b">
+<link rel="stylesheet" href="assets/css/style.css?v=20261117a">
 </head>
 <body>
 
@@ -35,16 +35,19 @@
     <nav class="nav" aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#demos">Demos</a>
+      <a href="#writing">Writing</a>
+      <a href="resume.html">Résumé</a>
       <a href="#about">About</a>
       <a href="https://github.com/donne4real" target="_blank" rel="noopener">GitHub</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
+    </nav>    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
     <a href="#work">Work</a>
     <a href="#demos">Demos</a>
+    <a href="#writing">Writing</a>
+    <a href="resume.html">Résumé</a>
     <a href="#about">About</a>
     <a href="https://github.com/donne4real" target="_blank" rel="noopener">GitHub</a>
   </nav>
@@ -68,26 +71,14 @@
 
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See the work</a>
+        <a class="btn btn-ghost" href="#demos">Try the live apps</a>
         <a class="btn btn-ghost" href="https://github.com/donne4real" target="_blank" rel="noopener">
           <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
           GitHub
         </a>
       </div>
 
-      <dl class="stats">
-        <div class="stat">
-          <dt>92.6% &rarr; 32.0%</dt>
-          <dd>How wrong the best speech tool was on Yoruba — then the number my selected model reached</dd>
-        </div>
-        <div class="stat">
-          <dt>22</dt>
-          <dd>Bible translations in a reader that works with no internet connection</dd>
-        </div>
-        <div class="stat">
-          <dt>$400</dt>
-          <dd>Total budget cap for shipping a working AI product — not exceeded</dd>
-        </div>
-      </dl>
+      <dl class="stats" id="statsGrid"></dl>
     </div>
   </section>
 
@@ -156,16 +147,13 @@
     </div>
   </section>
 
-  <!-- ============ FEATURED ============ -->
+  <!-- ============ 01 · FLAGSHIP ============ -->
   <section class="section" id="work">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker">01 &mdash; Flagship</p>
-        <h2>Closing the AI gap for Yoruba</h2>
-        <p class="section-sub">
-          The best speech-recognition tool available gets Yoruba badly wrong — 92.6% of words.
-          This project closes that gap on a $400 budget, with every number documented in public.
-        </p>
+        <p class="section-kicker" id="kicker-aiml">01 &mdash; Flagship</p>
+        <h2 id="title-aiml">Closing the AI gap for Yoruba</h2>
+        <p class="section-sub" id="sub-aiml"></p>
       </div>
 
       <article class="feature">
@@ -234,41 +222,95 @@
     </div>
   </section>
 
-  <!-- ============ AI / ML ============ -->
+  <!-- ============ 02 · AI & ML ============ -->
   <section class="section section-alt" id="aiml">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker">02 &mdash; AI &amp; Machine Learning</p>
-        <h2>AI that does real work</h2>
-        <p class="section-sub">
-          Models that actually run: speech that listens, documents that get read and summarised,
-          and test material written by a script instead of by hand.
-        </p>
+        <p class="section-kicker" id="kicker-ai">02 &mdash; AI &amp; Machine Learning</p>
+        <h2 id="title-ai">AI that does real work</h2>
+        <p class="section-sub" id="sub-ai"></p>
       </div>
-      <div class="grid" id="gridAiml"></div>
+      <div class="grid" id="gridAI"></div>
     </div>
   </section>
 
-  <!-- ============ ENGINEERING ============ -->
-  <section class="section" id="engineering">
+  <!-- ============ 03 · FAITH & AFRICAN LANGUAGES ============ -->
+  <section class="section" id="faith">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker">03 &mdash; Engineering</p>
-        <h2>Shipped products</h2>
-        <p class="section-sub">
-          Deployed, tested applications you can open right now — from a Bible reader that works
-          with no internet connection, to study apps and stock trackers.
-        </p>
+        <p class="section-kicker" id="kicker-faith">03 &mdash; Faith &amp; African Languages</p>
+        <h2 id="title-faith">Built for the languages and churches I grew up in</h2>
+        <p class="section-sub" id="sub-faith"></p>
+      </div>
+      <div class="grid" id="gridFaith"></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · ENGINEERING ============ -->
+  <section class="section section-alt" id="engineering">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker" id="kicker-engineering">04 &mdash; Engineering</p>
+        <h2 id="title-engineering">Shipped products</h2>
+        <p class="section-sub" id="sub-engineering"></p>
       </div>
       <div class="grid" id="gridEng"></div>
     </div>
   </section>
 
-  <!-- ============ LIVE DEMOS ============ -->
-  <section class="section section-alt" id="demos">
+  <!-- ============ 05 · FINANCE ============ -->
+  <section class="section" id="finance">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker">04 &mdash; Try them</p>
+        <p class="section-kicker" id="kicker-finance">05 &mdash; Finance &amp; Stock Screening</p>
+        <h2 id="title-finance">Making sense of markets</h2>
+        <p class="section-sub" id="sub-finance"></p>
+      </div>
+      <div class="grid" id="gridFinance"></div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · PRODUCTIVITY ============ -->
+  <section class="section section-alt" id="productivity">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker" id="kicker-productivity">06 &mdash; Productivity</p>
+        <h2 id="title-productivity">Tools for everyday work</h2>
+        <p class="section-sub" id="sub-productivity"></p>
+      </div>
+      <div class="grid" id="gridProductivity"></div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · LEARNING & MEDIA ============ -->
+  <section class="section" id="learning">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker" id="kicker-learning">07 &mdash; Learning &amp; Media</p>
+        <h2 id="title-learning">Teaching, and telling stories</h2>
+        <p class="section-sub" id="sub-learning"></p>
+      </div>
+      <div class="grid" id="gridLearning"></div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · HEALTH & TRAINING ============ -->
+  <section class="section section-alt" id="health">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker" id="kicker-health">08 &mdash; Health &amp; Training</p>
+        <h2 id="title-health">Care, and professional development</h2>
+        <p class="section-sub" id="sub-health"></p>
+      </div>
+      <div class="grid" id="gridHealth"></div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE DEMOS ============ -->
+  <section class="section" id="demos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker">09 &mdash; Try them</p>
         <h2>Live demos</h2>
         <p class="section-sub">Everything below is running right now. Click through.</p>
       </div>
@@ -276,11 +318,26 @@
     </div>
   </section>
 
+  <!-- ============ WRITING ============ -->
+  <section class="section section-alt" id="writing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker">10 &mdash; Writing &amp; Insights</p>
+        <h2>Field notes, not just finished things</h2>
+        <p class="section-sub">
+          The decision logs, model cards and build notes behind the work — including the parts
+          that did not go to plan.
+        </p>
+      </div>
+      <div class="grid" id="gridWriting"></div>
+    </div>
+  </section>
+
   <!-- ============ ABOUT ============ -->
   <section class="section" id="about">
     <div class="wrap about-grid">
       <div>
-        <p class="section-kicker">05 &mdash; About</p>
+        <p class="section-kicker">11 &mdash; About</p>
         <h2>How I work</h2>
         <div class="about-copy">
           <p>
@@ -332,6 +389,7 @@
             <li><a href="https://github.com/donne4real" target="_blank" rel="noopener">github.com/donne4real</a></li>
             <li><a href="https://www.linkedin.com/in/donne4real" target="_blank" rel="noopener">linkedin.com/in/donne4real</a></li>
             <li><a href="mailto:leyeajibola@gmail.com">leyeajibola@gmail.com</a></li>
+            <li><a href="resume.html">Résumé (printable)</a></li>
           </ul>
         </div>
       </aside>
@@ -344,13 +402,14 @@
   <div class="wrap footer-inner">
     <p>&copy; <span id="year">2026</span> Leye Ajibola. Built and deployed from Virginia.</p>
     <p class="footer-note">
-      Every number on this site is measured, not estimated.
+      Every number on this site is measured, not estimated — re-checked against the live apps on
+      <span id="verifyDate">17 November 2026</span>.
       Source for all claims: <a href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">github.com/donne4real/aso-oke</a>
     </p>
   </div>
 </footer>
 
-<script src="assets/js/projects.js?v=20261110b"></script>
-<script src="assets/js/main.js?v=20261110b"></script>
+<script src="assets/js/projects.js?v=20261117a"></script>
+<script src="assets/js/main.js?v=20261117a"></script>
 </body>
 </html>

@@ -1,0 +1,296 @@
+/* ============================================================
+   Résumé page styles — shares the main palette, tuned for print.
+   ============================================================ */
+
+.resume-body {
+  background: var(--bg);
+  padding-bottom: 60px;
+}
+
+/* ---------- top action bar (hidden when printing) ---------- */
+
+.resume-bar {
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg-alt);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.resume-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+}
+
+.resume-bar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ---------- layout ---------- */
+
+.resume-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+}
+
+.resume {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 46px 48px 40px;
+}
+
+/* ---------- header ---------- */
+
+.resume-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 26px;
+  margin-bottom: 30px;
+}
+
+.resume-head h1 {
+  margin: 0 0 6px;
+  font-size: 2.1rem;
+  letter-spacing: -0.03em;
+  font-weight: 680;
+}
+
+.resume-title {
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--accent);
+  letter-spacing: .01em;
+}
+
+.resume-contact {
+  margin: 0 0 16px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.resume-contact a { color: var(--ink-soft); }
+.resume-contact a:hover { color: var(--accent); }
+.resume-contact span[aria-hidden] { color: var(--dim); }
+
+.resume-strap {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 62ch;
+}
+
+/* ---------- sections ---------- */
+
+.resume-section {
+  margin-bottom: 34px;
+}
+
+.resume-section > h2 {
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-family: var(--mono);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.resume-section h3 {
+  margin: 26px 0 12px;
+  font-size: 13.5px;
+  font-weight: 620;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+}
+
+.resume-section h3:first-of-type { margin-top: 0; }
+
+/* ---------- bullets ---------- */
+
+.resume-bullets {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 9px;
+  font-size: 14.3px;
+  line-height: 1.62;
+  color: var(--ink-soft);
+}
+
+.resume-bullets li strong { color: var(--ink); font-weight: 620; }
+
+/* ---------- project items ---------- */
+
+.resume-item {
+  margin-bottom: 20px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+}
+
+.resume-item:last-child { margin-bottom: 4px; }
+
+.resume-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.resume-item-head strong {
+  font-size: 15px;
+  font-weight: 620;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.resume-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+.resume-item p {
+  margin: 0 0 6px;
+  font-size: 13.8px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 76ch;
+}
+
+.resume-links {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.resume-links a { color: var(--accent); }
+.resume-links span[aria-hidden] { color: var(--dim); margin: 0 4px; }
+
+/* ---------- skills ---------- */
+
+.resume-skills {
+  margin: 0;
+  display: grid;
+  gap: 11px;
+}
+
+.resume-skills > div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 18px;
+  align-items: baseline;
+}
+
+.resume-skills dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: .02em;
+}
+
+.resume-skills dd {
+  margin: 0;
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- footer ---------- */
+
+.resume-foot {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12.5px;
+  color: var(--dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.resume-foot p { margin: 0; }
+.resume-foot a { color: var(--accent); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  .resume-wrap { padding: 24px 16px 0; }
+  .resume { padding: 30px 22px; }
+  .resume-head h1 { font-size: 1.7rem; }
+  .resume-skills > div { grid-template-columns: 1fr; gap: 3px; }
+  .resume-bar-inner { flex-wrap: wrap; }
+}
+
+/* ============================================================
+   PRINT — white paper, black ink, one page-friendly layout
+   ============================================================ */
+
+@media print {
+  @page { margin: 14mm; }
+
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .no-print, .resume-bar { display: none !important; }
+
+  .resume-wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resume {
+    background: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  .resume-head h1,
+  .resume-section h3,
+  .resume-item-head strong,
+  .resume-bullets li strong,
+  .resume-strap { color: #000 !important; }
+
+  .resume-title,
+  .resume-section > h2,
+  .resume-skills dt,
+  .resume-links a { color: #1a4fd6 !important; }
+
+  .resume-section > h2 { border-bottom-color: #bbb !important; }
+
+  .resume-item { border-left-color: #ccc !important; break-inside: avoid; }
+  .resume-item p,
+  .resume-bullets li,
+  .resume-skills dd,
+  .resume-contact,
+  .resume-contact a { color: #333 !important; }
+
+  .resume-tag { color: #666 !important; }
+  .resume-foot { color: #666 !important; border-top-color: #ccc !important; }
+  .resume-foot a { color: #1a4fd6 !important; }
+
+  a { text-decoration: none; }
+
+  .resume-section { break-inside: avoid-page; }
+  .resume-head { break-after: avoid; }
+}

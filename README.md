@@ -14,32 +14,44 @@ Every number on the site is **measured, not estimated**, and every claim links b
 
 ```
 index.html              markup + inline content
+resume.html             printable résumé (print CSS included)
 404.html                not-found page
+sitemap.xml             referenced by robots.txt
 favicon.svg
 robots.txt
 netlify.toml            build config, cache headers, redirects
 assets/
   css/style.css         all styles (design tokens in :root)
+  css/resume.css        résumé styles + print rules
   js/projects.js        ← single source of truth for project data
   js/main.js            rendering + interactions
+docs/
+  PROJECT-INDEX.md      every project, with paths and status
+  DEPLOYMENT-PLAN.md    deployment and hosting plan
 ```
 
 ## Updating the site
 
 **To add or edit a project, edit `assets/js/projects.js` only.** The renderer picks up
-`PROJECTS.aiml`, `PROJECTS.engineering` and `PROJECTS.demos` automatically. No rebuild.
+every section automatically — `PROJECTS.aiml`, `PROJECTS.ai`, `PROJECTS.faith`,
+`PROJECTS.engineering`, `PROJECTS.finance`, `PROJECTS.productivity`, `PROJECTS.learning`,
+`PROJECTS.health` and `PROJECTS.demos`. No rebuild.
 
 ```js
 {
   title: "Project name",
   kind: "One-line category",
-  status: "live",
-  desc: "What it does and what's interesting about it.",
+  status: "live",                 // "live" | "soon" | anything else
+  statusLabel: "Internal tool",   // badge text when status isn't "live"
+  desc: "Plain-English description. Say what it does, not how it does it.",
   tags: ["Python", "React"],
   metrics: [["Label", "Value"]],
   links: [{ label: "Repository", href: "https://github.com/..." }]
 }
 ```
+
+Section headings (`SECTIONS`), the headline numbers (`STATS`) and the writing links
+(`WRITING`) live in the same file, so content and headings can never drift apart.
 
 Then commit and push — Netlify redeploys automatically.
 
@@ -48,8 +60,8 @@ Then commit and push — Netlify redeploys automatically.
 `index.html` references assets with a version query string:
 
 ```html
-<link rel="stylesheet" href="assets/css/style.css?v=20261024">
-<script src="assets/js/projects.js?v=20261024"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=20261117a">
+<script src="assets/js/projects.js?v=20261117a"></script>
 ```
 
 **Whenever you edit `style.css`, `main.js` or `projects.js`, bump `?v=` in all three
@@ -66,15 +78,39 @@ edit the data and push, and the page picks it up on the next load.
 All colour, radius and typography values live in the `:root` block of `assets/css/style.css`.
 Dark theme, accent `#7C9CFF`, green `#4ADE80` for live status, amber for pending.
 
+## Rules this site follows
+
+1. **Every number is measured, not estimated.** Each figure was checked against the live
+   application or the repository. If you add a metric, verify it the same way.
+2. **One source of truth.** Content lives in `projects.js`. The HTML holds structure only.
+3. **Write for a non-specialist.** The `desc` field is read by people who don't know what
+   LoRA is. Technical detail belongs in `tags`.
+4. **No dead links.** Every URL in `links` and `demos` was checked live.
+5. **Say what didn't work.** The Aso Oke card deliberately reports the model that failed
+   its pass mark, and the translation score that fell short.
+
 ## Deploy
 
-Push to `main` → Netlify publishes automatically (build command is empty; `publish = "."`).
+Push to `main` → GitHub Actions → Netlify publishes automatically (build command is empty;
+`publish = "."`).
 
 To deploy manually:
 
 ```bash
 netlify deploy --prod --dir .
 ```
+
+## Verification record
+
+All links and metrics re-verified **17 November 2026**:
+
+- 12 live demo URLs → HTTP 200 (NGX Tracker sits behind Cloudflare Access, so it returns
+  a sign-in page rather than the app)
+- Cert Mastery → **1,800 questions** across 6 certifications (300 each)
+- Exam Prep NG → **12,675 questions** across 12 subjects / 23 board combinations
+- Bible in African Languages → **22 translations**, 19 with offline bundles
+- Powerball Predictor → **296 draws** in `python/data/powerball_history.csv`
+- Google Play → **50+ downloads**, no data collected
 
 ## Accessibility & performance notes
 
