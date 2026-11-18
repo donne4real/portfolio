@@ -448,20 +448,12 @@ const PROJECTS = {
   demos: [
     {
       name: "Bible in African Languages",
-      url: "https://bible-app.leyesapps.workers.dev",
-      desc: "22 translations, 19 of them working with no internet connection, plus study tools and reading plans.",
-      state: "up"
-    },
-    {
-      name: "Bible in African Languages — Google Play",
-      url: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader",
-      desc: "Published Android app, 50+ downloads. No data collected, nothing shared.",
-      state: "up"
-    },
-    {
-      name: "Bible in African Languages — Store page",
-      url: "https://wordupbibleapp.pages.dev",
-      desc: "The store landing page, hosted on Cloudflare Pages.",
+      desc: "22 translations, 19 of them working with no internet connection, plus study tools and reading plans. Published as an Android app on Google Play with 50+ downloads — no data collected, nothing shared.",
+      links: [
+        { label: "Open the web app", href: "https://bible-app.leyesapps.workers.dev" },
+        { label: "Get it on Google Play", href: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader" },
+        { label: "Store page", href: "https://wordupbibleapp.pages.dev" }
+      ],
       state: "up"
     },
     {
@@ -524,7 +516,7 @@ const PROJECTS = {
 /* ---- Headline numbers: computed from the lists above, not typed by hand ---- */
 const STATS = [
   { value: "25", label: "Projects built and shipped", note: "Every one is a working application, not a mock-up" },
-  { value: "12", label: "Apps live on the web today", note: "Open any of them from the demos section" },
+  { value: "10", label: "Apps live on the web today", note: "Open any of them from the demos section" },
   { value: "18,475", label: "Practice questions written", note: "1,800 certification + 12,675 Nigerian exam questions" },
   { value: "22", label: "Bible translations", note: "19 of them work with no internet connection" }
 ];

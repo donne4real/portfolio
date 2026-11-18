@@ -68,18 +68,41 @@
       "</article>";
   }
 
+  /* A demo may have one primary `url`, or several `links` when the same
+     product is published in more than one place (web app, app store,
+     landing page). The first link is the primary destination. */
+  function demoLinks(d) {
+    if (d.links && d.links.length) return d.links;
+    if (d.url) return [{ label: "", href: d.url }];
+    return [];
+  }
+
   function renderDemo(d) {
     var pending = d.state !== "up";
-    return '<a class="demo" href="' + esc(d.url) + '" target="_blank" rel="noopener">' +
-      '<div class="demo-top">' +
-        '<span class="demo-name">' + esc(d.name) + "</span>" +
-        '<span class="status' + (pending ? " pending" : "") + '">' +
-          '<span class="pulse" aria-hidden="true"></span>' + (pending ? "deploying" : "live") +
-        "</span>" +
-      "</div>" +
-      "<p>" + esc(d.desc) + "</p>" +
-      '<span class="demo-url">' + esc(d.url.replace(/^https?:\/\//, "")) + "</span>" +
-      "</a>";
+    var links = demoLinks(d);
+    var primary = links[0] || { href: "#" };
+    var others = links.slice(1);
+
+    var extra = others.length
+      ? '<div class="demo-extra">' + others.map(function (l) {
+          return '<a href="' + esc(l.href) + '" target="_blank" rel="noopener">' +
+            esc(l.label) + ' <span class="arrow" aria-hidden="true">&rarr;</span></a>';
+        }).join("") + "</div>"
+      : "";
+
+    return '<article class="demo">' +
+      '<a class="demo-main" href="' + esc(primary.href) + '" target="_blank" rel="noopener">' +
+        '<div class="demo-top">' +
+          '<span class="demo-name">' + esc(d.name) + "</span>" +
+          '<span class="status' + (pending ? " pending" : "") + '">' +
+            '<span class="pulse" aria-hidden="true"></span>' + (pending ? "deploying" : "live") +
+          "</span>" +
+        "</div>" +
+        "<p>" + esc(d.desc) + "</p>" +
+        '<span class="demo-url">' + esc(primary.href.replace(/^https?:\/\//, "")) + "</span>" +
+      "</a>" +
+      extra +
+      "</article>";
   }
 
   function renderStat(s) {

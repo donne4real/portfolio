@@ -235,10 +235,23 @@ h1 {
   transition: border-color .18s, transform .18s, background .18s;
 }
 .demo:hover { text-decoration: none; border-color: #3A3F49; transform: translateY(-3px); background: var(--surface-2); }
+/* The primary link fills the card; secondary links sit below it. */
+.demo-main { display: flex; flex-direction: column; gap: 9px; color: inherit; text-decoration: none; }
+.demo-main:hover { text-decoration: none; color: inherit; }
 .demo-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .demo-name { font-weight: 620; font-size: 15.5px; letter-spacing: -0.015em; }
 .demo-url { font-family: var(--mono); font-size: 12px; color: var(--dim); word-break: break-all; }
 .demo p { margin: 0; font-size: 13.6px; color: var(--ink-soft); line-height: 1.55; }
+/* Secondary destinations for one product published in several places. */
+.demo-extra {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+  margin-top: 2px; padding-top: 11px; border-top: 1px solid var(--line-soft);
+  font-size: 13px; font-weight: 500;
+}
+.demo-extra a { display: inline-flex; align-items: center; gap: 5px; color: var(--ink-soft); }
+.demo-extra a:hover { color: var(--accent); }
+.demo-extra .arrow { transition: transform .16s; display: inline-block; }
+.demo-extra a:hover .arrow { transform: translateX(3px); }
 .demo .status { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--green); font-family: var(--mono); }
 .demo .status .pulse { width: 6px; height: 6px; }
 .demo .status.pending { color: var(--amber); }

@@ -104,7 +104,7 @@ netlify deploy --prod --dir .
 
 All links and metrics re-verified **17 November 2026**:
 
-- 12 live demo URLs → HTTP 200 (NGX Tracker sits behind Cloudflare Access, so it returns
+- 10 live demo cards → HTTP 200 (NGX Tracker sits behind Cloudflare Access, so it returns
   a sign-in page rather than the app)
 - Cert Mastery → **1,800 questions** across 6 certifications (300 each)
 - Exam Prep NG → **12,675 questions** across 12 subjects / 23 board combinations
