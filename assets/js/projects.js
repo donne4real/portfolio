@@ -6,7 +6,7 @@
    with no AI engineering background. The `tags` array is where the
    technical detail lives, for people who want it.
 
-   VERIFIED 17 Nov 2026 against the live apps and repos.
+   VERIFIED 23 Nov 2026 against the live Cloudflare apps and repos.
    ============================================================ */
 
 /* ---- Section metadata: drives the group headings ---- */
@@ -100,7 +100,7 @@ const PROJECTS = {
       kind: "Live sermon transcription",
       status: "live",
       desc: "Press start and it transcribes the sermon in the browser as it happens, spots Bible references while they are spoken, then sends the transcript to Claude for a summary, the main points, and the full list of passages referenced. The audio never leaves the device during listening.",
-      tags: ["JavaScript", "SpeechRecognition", "Claude API", "Netlify Functions", "Cloudflare Workers"],
+      tags: ["JavaScript", "SpeechRecognition", "Claude API", "Cloudflare Workers"],
       metrics: [
         ["Transcribes", "Live, in the browser"],
         ["Audio uploaded", "Never"],
@@ -108,7 +108,8 @@ const PROJECTS = {
         ["History stored", "On your device"]
       ],
       links: [
-        { label: "Repository", href: "https://github.com/donne4real/sermon-listener" }
+        { label: "Repository", href: "https://github.com/donne4real/sermon-listener" },
+        { label: "Live", href: "https://sermons.leyesapps.com", external: true }
       ]
     }
   ],
@@ -131,8 +132,8 @@ const PROJECTS = {
       links: [
         { label: "Repository", href: "https://github.com/donne4real/bible-app" },
         { label: "Google Play", href: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader", external: true },
-        { label: "Web app", href: "https://bible-app.leyesapps.workers.dev", external: true },
-        { label: "Store page", href: "https://wordupbibleapp.pages.dev", external: true }
+        { label: "Web app", href: "https://bible.leyesapps.com", external: true },
+        { label: "Store page", href: "https://wordup.leyesapps.com", external: true }
       ]
     },
     {
@@ -147,7 +148,7 @@ const PROJECTS = {
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/bible-verse-detector" },
-        { label: "Live", href: "https://bible-verse-detector.netlify.app", external: true }
+        { label: "Live", href: "https://verses.leyesapps.com", external: true }
       ]
     }
   ],
@@ -168,7 +169,7 @@ const PROJECTS = {
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/cert-mastery" },
-        { label: "Live", href: "https://cert-mastery.netlify.app", external: true }
+        { label: "Live", href: "https://certs.leyesapps.com", external: true }
       ]
     },
     {
@@ -184,7 +185,7 @@ const PROJECTS = {
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/ngx-tracker" },
-        { label: "Live", href: "https://ngx-tracker.pages.dev", external: true }
+        { label: "Live", href: "https://ngx.leyesapps.com", external: true }
       ]
     },
     {
@@ -215,7 +216,7 @@ const PROJECTS = {
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/powerball-predictor" },
-        { label: "Live", href: "https://powerball-predictor.netlify.app", external: true }
+        { label: "Live", href: "https://powerball.leyesapps.com", external: true }
       ]
     },
     {
@@ -223,14 +224,14 @@ const PROJECTS = {
       kind: "Vocabulary builder",
       status: "live",
       desc: "Learn vocabulary on a schedule that spaces your reviews out — the method research shows makes words stick — and watch your progress build over time.",
-      tags: ["React", "TypeScript", "Netlify"],
+      tags: ["React", "TypeScript", "Cloudflare Pages"],
       metrics: [
         ["Method", "Reviews spaced out"],
         ["Where it runs", "The web"]
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/vocabulary_app" },
-        { label: "Live", href: "https://build-my-vocab.netlify.app", external: true }
+        { label: "Live", href: "https://vocab.leyesapps.com", external: true }
       ]
     }
   ],
@@ -238,17 +239,19 @@ const PROJECTS = {
   /* ---------- 05 · FINANCE ---------- */
   finance: [
     {
-      title: "MarketSage Analyzer",
-      kind: "Stock screener",
+      title: "MarketSage Unified",
+      kind: "Multi-asset investing workbench",
       status: "live",
-      desc: "Put in a stock and see how it scores against ten investing styles — value, growth, quality, income and more. It shows which philosophies would have liked it, and which would not.",
-      tags: ["Python", "Streamlit", "yfinance", "Value investing"],
+      desc: "One consolidated platform uniting stocks, ETFs, mutual funds, 100-bagger screening, technical charts, DCF/DRIP valuation, portfolio risk (VaR/CVaR), SEC 10-K filings and AI summaries — backed by a multi-source data cache and 33 automated tests.",
+      tags: ["Python", "Streamlit", "Plotly", "SQLite", "SEC EDGAR", "Multi-LLM", "pytest"],
       metrics: [
-        ["Ways to judge a stock", "10"],
-        ["Named after", "Graham, Buffett, Lynch and more"]
+        ["Scoring models", "45 across 4 asset types"],
+        ["Automated tests", "33"],
+        ["Legacy apps unified", "11 into 1"]
       ],
       links: [
-        { label: "Repository", href: "https://github.com/donne4real/MarketSage-Analyzer" }
+        { label: "Repository", href: "https://github.com/donne4real/MarketSage-Unified" },
+        { label: "Live", href: "https://marketsage.streamlit.app/", external: true }
       ]
     },
     {
@@ -325,7 +328,7 @@ const PROJECTS = {
       kind: "Daily and weekly task tracker",
       status: "live",
       desc: "A clean cockpit for the week — deadlines, decisions waiting on you, the day's tasks and the standing daily routines, all in one view. The week is generated from a single data file, and checkmarks persist on your device.",
-      tags: ["JavaScript", "JSON", "Netlify", "localStorage"],
+      tags: ["JavaScript", "JSON", "Cloudflare Pages", "localStorage"],
       metrics: [
         ["Views", "Today and Week"],
         ["Checkmarks", "Saved on your device"],
@@ -333,7 +336,7 @@ const PROJECTS = {
       ],
       links: [
         { label: "Repository", href: "https://github.com/donne4real/daily-plan" },
-        { label: "Live", href: "https://leyes-daily-plan.netlify.app", external: true }
+        { label: "Live", href: "https://plan.leyesapps.com", external: true }
       ]
     },
     {
@@ -394,7 +397,7 @@ const PROJECTS = {
         ["Where it runs", "The web"]
       ],
       links: [
-        { label: "Live", href: "https://niatheinvestigator.netlify.app", external: true }
+        { label: "Live", href: "https://nia.leyesapps.com", external: true }
       ]
     },
     {
@@ -447,24 +450,42 @@ const PROJECTS = {
   /* ---------- LIVE DEMOS ---------- */
   demos: [
     {
+      name: "MarketSage Unified",
+      url: "https://marketsage.streamlit.app/",
+      desc: "45 investing models across stocks, ETFs, mutual funds & 100-baggers, plus technicals, DCF/DRIP valuation, portfolio risk and SEC 10-K AI briefs.",
+      state: "up"
+    },
+    {
       name: "Bible in African Languages",
       desc: "22 translations, 19 of them working with no internet connection, plus study tools and reading plans. Published as an Android app on Google Play with 50+ downloads — no data collected, nothing shared.",
       links: [
-        { label: "Open the web app", href: "https://bible-app.leyesapps.workers.dev" },
+        { label: "Open the web app", href: "https://bible.leyesapps.com" },
         { label: "Get it on Google Play", href: "https://play.google.com/store/apps/details?id=com.wordupafrica.biblereader" },
-        { label: "Store page", href: "https://wordupbibleapp.pages.dev" }
+        { label: "Store page", href: "https://wordup.leyesapps.com" }
       ],
       state: "up"
     },
     {
       name: "Bible Verse Detector",
-      url: "https://bible-verse-detector.netlify.app",
+      url: "https://verses.leyesapps.com",
       desc: "Finds and identifies Bible verses inside any block of text or image.",
       state: "up"
     },
     {
+      name: "Sermon Listener",
+      url: "https://sermons.leyesapps.com",
+      desc: "Live church sermon transcription, automatic Bible verse detection and AI summaries.",
+      state: "up"
+    },
+    {
+      name: "Naija News Digest",
+      url: "https://news.leyesapps.com",
+      desc: "Automated daily Nigerian news digest with deduplication, LLM summaries, search and RSS.",
+      state: "up"
+    },
+    {
       name: "Cert Mastery",
-      url: "https://cert-mastery.netlify.app",
+      url: "https://certs.leyesapps.com",
       desc: "1,800 practice questions across AWS, Security+, CISSP, PMP, NCE and NCMHCE.",
       state: "up"
     },
@@ -476,7 +497,7 @@ const PROJECTS = {
     },
     {
       name: "Powerball Predictor",
-      url: "https://powerball-predictor.netlify.app",
+      url: "https://powerball.leyesapps.com",
       desc: "Looks through 296 past draws for patterns — hot numbers, 'due' numbers and pairs.",
       state: "up"
     },
@@ -488,26 +509,26 @@ const PROJECTS = {
     },
     {
       name: "Vocabulary App",
-      url: "https://build-my-vocab.netlify.app",
+      url: "https://vocab.leyesapps.com",
       desc: "Vocabulary practice on a schedule that makes words stick.",
       state: "up"
     },
     {
       name: "Nia The Investigator",
-      url: "https://niatheinvestigator.netlify.app",
+      url: "https://nia.leyesapps.com",
       desc: "An interactive story you work through by investigating.",
       state: "up"
     },
     {
       name: "Daily Plan Cockpit",
-      url: "https://leyes-daily-plan.netlify.app",
+      url: "https://plan.leyesapps.com",
       desc: "A daily and weekly task cockpit that keeps your checkmarks on your own device.",
       state: "up"
     },
     {
       name: "NGX Tracker",
-      url: "https://ngx-tracker.pages.dev",
-      desc: "Around 146 Nigerian Exchange stocks, tracked live. Sign-in required.",
+      url: "https://ngx.leyesapps.com",
+      desc: "Around 146 Nigerian Exchange stocks, tracked live.",
       state: "up"
     }
   ]
@@ -516,7 +537,7 @@ const PROJECTS = {
 /* ---- Headline numbers: computed from the lists above, not typed by hand ---- */
 const STATS = [
   { value: "25", label: "Projects built and shipped", note: "Every one is a working application, not a mock-up" },
-  { value: "10", label: "Apps live on the web today", note: "Open any of them from the demos section" },
+  { value: "13", label: "Apps live on the web today", note: "Open any of them from the demos section" },
   { value: "18,475", label: "Practice questions written", note: "1,800 certification + 12,675 Nigerian exam questions" },
   { value: "22", label: "Bible translations", note: "19 of them work with no internet connection" }
 ];
