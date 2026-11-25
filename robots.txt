@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leye-ajibola.netlify.app/sitemap.xml
+Sitemap: https://leyeajibola.com/sitemap.xml

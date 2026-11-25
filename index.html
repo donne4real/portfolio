@@ -3,24 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leye Ajibola — AI Engineer</title>
-<meta name="description" content="AI Engineer building production speech-to-text, translation and local-LLM systems. 25 shipped projects across AI, African languages, finance and education. Shipping a Yoruba AI tool to close a 92.6% word-error-rate gap.">
+<title>Leye Ajibola — AI Engineer (ASR, NMT &amp; Local LLM Systems)</title>
+<meta name="description" content="AI Engineer shipping production speech-to-text, machine translation, local-LLM and offline-first systems against pre-registered evaluation gates. Cut Yorùbá WER from 92.6% to 32.0% on a $400 budget.">
 <meta name="author" content="Leye Ajibola">
-<meta name="theme-color" content="#0A0B0D">
+<meta name="theme-color" content="#080A0F">
+<link rel="canonical" href="https://leyeajibola.com/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Leye Ajibola — AI Engineer">
-<meta property="og:description" content="Production speech-to-text, translation and local-LLM systems. 25 shipped projects. Closing the AI gap for Yoruba.">
-<meta property="og:url" content="https://leyeajibola.com">
+<meta property="og:description" content="Production speech-to-text, translation &amp; local-LLM systems built against pre-registered evaluation gates. Cut Yorùbá WER from 92.6% to 32.0%.">
+<meta property="og:url" content="https://leyeajibola.com/">
+<meta property="og:image" content="https://leyeajibola.com/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Leye Ajibola — AI Engineer">
-<meta name="twitter:description" content="Production speech-to-text, translation and local-LLM systems. 25 shipped projects.">
+<meta name="twitter:description" content="Production ASR, NMT &amp; local-LLM systems. 14 live web &amp; Play apps. Closing a 92.6% Yorùbá WER gap.">
+<meta name="twitter:image" content="https://leyeajibola.com/assets/og-card.png">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261123">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261125">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Leye Ajibola",
+  "jobTitle": "AI Engineer",
+  "url": "https://leyeajibola.com",
+  "sameAs": [
+    "https://github.com/donne4real",
+    "https://www.linkedin.com/in/donne4real",
+    "https://huggingface.co/donne4real"
+  ],
+  "knowsAbout": ["Speech Recognition (ASR)", "Machine Translation", "LoRA/PEFT", "Local LLMs", "Cloudflare Workers", "Python", "PyTorch"]
+}
+</script>
 </head>
 <body>
 
@@ -32,24 +53,47 @@
       <span class="brand-mark" aria-hidden="true">LA</span>
       <span class="brand-text">Leye Ajibola</span>
     </a>
+
     <nav class="nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#demos">Demos</a>
+      <a href="#flagship">Flagship</a>
+      <a href="#projects">Projects</a>
+      <a href="#demos">Live Apps</a>
       <a href="#writing">Writing</a>
-      <a href="resume.html">Résumé</a>
       <a href="#about">About</a>
-      <a href="https://github.com/donne4real" target="_blank" rel="noopener">GitHub</a>
-    </nav>    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+      <a href="resume.html">Résumé</a>
+    </nav>
+
+    <div class="header-controls">
+      <div class="mode-switch" role="group" aria-label="Reading mode">
+        <button type="button" class="mode-btn" data-mode-btn="tech" aria-pressed="true">Technical</button>
+        <button type="button" class="mode-btn" data-mode-btn="plain" aria-pressed="false">Plain English</button>
+      </div>
+
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
+
   <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
-    <a href="#work">Work</a>
-    <a href="#demos">Demos</a>
+    <a href="#flagship">Flagship</a>
+    <a href="#projects">Projects</a>
+    <a href="#demos">Live Apps</a>
     <a href="#writing">Writing</a>
-    <a href="resume.html">Résumé</a>
     <a href="#about">About</a>
-    <a href="https://github.com/donne4real" target="_blank" rel="noopener">GitHub</a>
+    <a href="resume.html">Résumé</a>
+    <a href="https://github.com/donne4real" target="_blank" rel="noopener">GitHub &rarr;</a>
+    <div class="nav-mobile-mode">
+      <div class="mode-switch" role="group" aria-label="Reading mode">
+        <button type="button" class="mode-btn" data-mode-btn="tech" aria-pressed="true">Technical</button>
+        <button type="button" class="mode-btn" data-mode-btn="plain" aria-pressed="false">Plain English</button>
+      </div>
+    </div>
   </nav>
 </header>
 
@@ -58,341 +102,274 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <h1>I build AI that works on&nbsp;languages<br>the world forgot.</h1>
-      <p class="lede">
-        I'm a BI Architect moving into AI engineering. I build AI that listens to speech,
-        translates languages, and runs on your own machine — and I write down the pass mark
-        <em>before</em> I start, so the result decides whether it ships.
-      </p>
-      <p class="lede-note">
-        New to this side of AI? <a href="#plain">Start with the plain-English guide</a> —
-        every term on this page is explained there.
-      </p>
+      <div class="hero-grid">
+        <div>
+          <div class="avail-pill">
+            <span class="pulse" aria-hidden="true"></span>
+            <span>Open to AI / ML Engineer roles &middot; Virginia / Remote</span>
+          </div>
 
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#work">See the work</a>
-        <a class="btn btn-ghost" href="#demos">Try the live apps</a>
-        <a class="btn btn-ghost" href="https://github.com/donne4real" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-          GitHub
-        </a>
+          <h1>I build AI that works on <span class="gradient-text">languages the world forgot.</span></h1>
+
+          <p class="lede" id="heroLedeTech">
+            BI Architect turned <strong>AI Engineer</strong> building production ASR, machine translation,
+            local-LLM and Cloudflare edge systems. Every model ships against <strong>pre-registered evaluation gates</strong>
+            and licence audits — and I publish what failed as openly as what won.
+          </p>
+
+          <p class="lede" id="heroLedePlain" hidden>
+            I'm a data architect moving into <strong>AI engineering</strong>. I build AI that listens to speech,
+            translates underserved languages, and runs privately on your own device — writing down the pass mark
+            <em>before</em> I start so the measured result decides whether it ships.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#flagship">Explore flagship</a>
+            <a class="btn btn-ghost" href="resume.html">Résumé (PDF)</a>
+            <button type="button" class="btn btn-ghost" data-copy-email>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy email
+            </button>
+            <a class="btn btn-ghost" href="https://github.com/donne4real" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Measured Benchmark Visual -->
+        <aside class="bench-card" aria-label="Aso Oke Yorùbá ASR benchmark results">
+          <div class="bench-head">
+            <span class="bench-kicker">Flagship Eval &middot; Aso Oke</span>
+            <span class="badge badge-soon">Ships 13 Dec</span>
+          </div>
+          <h2 class="bench-title">Yorùbá Speech Recognition (Lower WER is better)</h2>
+          <div class="bench-bars" id="benchBars"></div>
+          <div class="bench-foot">
+            <span>FLEURS (817) + 20-speaker holdout</span>
+            <span class="bench-delta">&minus;60.6 pts vs baseline</span>
+          </div>
+        </aside>
       </div>
 
       <dl class="stats" id="statsGrid"></dl>
     </div>
   </section>
 
-  <!-- ============ PLAIN ENGLISH ============ -->
-  <section class="section section-alt" id="plain">
+  <!-- ============ 01 · FLAGSHIP ============ -->
+  <section class="section section-alt" id="flagship">
     <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker">00 &mdash; In plain English</p>
-        <h2>How to read this page</h2>
-        <p class="section-sub">
-          AI work comes with its own vocabulary. Here are the words that appear below,
-          translated. If you only read one thing on this site, read this.
-        </p>
+      <!-- Glossary drawer shown automatically in Plain English mode -->
+      <div class="glossary-panel" id="glossaryPanel" hidden>
+        <div class="glossary-head">
+          <div>
+            <h3>Plain-English glossary</h3>
+            <p>Quick translations of the AI terms used across this portfolio.</p>
+          </div>
+          <button type="button" class="btn btn-sm btn-ghost" data-mode-btn="tech">Switch back to Technical</button>
+        </div>
+        <dl class="glossary" id="glossaryList"></dl>
       </div>
 
-      <dl class="glossary">
-        <div>
-          <dt>Word error rate (WER)</dt>
-          <dd>How many words a speech-to-text tool gets wrong. 0% is a perfect transcript.</dd>
-        </div>
-        <div>
-          <dt>Fine-tuning</dt>
-          <dd>Teaching an existing AI model extra lessons on your own data, rather than building one from scratch.</dd>
-        </div>
-        <div>
-          <dt>Pre-registered gate</dt>
-          <dd>A pass mark written down <em>before</em> the work starts, so the result can't be argued with afterwards.</dd>
-        </div>
-        <div>
-          <dt>Latency (p95)</dt>
-          <dd>How long the slowest 1-in-20 requests take. Lower is better; p95 means 95% of requests beat it.</dd>
-        </div>
-        <div>
-          <dt>Inference</dt>
-          <dd>When a trained model actually answers a question. Training is the homework; inference is the exam.</dd>
-        </div>
-        <div>
-          <dt>Local / on-device AI</dt>
-          <dd>A model that runs on your own computer instead of someone's server, so your data never leaves the machine.</dd>
-        </div>
-        <div>
-          <dt>BLEU</dt>
-          <dd>The standard 0&ndash;100 score for "how close is this translation to a human's?"</dd>
-        </div>
-        <div>
-          <dt>Offline-first</dt>
-          <dd>The app works with no internet connection, and only goes online if you ask it to.</dd>
-        </div>
-        <div>
-          <dt>CI/CD</dt>
-          <dd>Automatic checks that run every time code is published, so a broken release can't go live.</dd>
-        </div>
-        <div>
-          <dt>Retrieval (RAG)</dt>
-          <dd>Looking through your own documents first, then answering using what it found.</dd>
-        </div>
-        <div>
-          <dt>Licence audit</dt>
-          <dd>Checking you are allowed to use a dataset before you build on it &mdash; not after you launch.</dd>
-        </div>
-        <div>
-          <dt>Baseline</dt>
-          <dd>The number you had before you started, so any improvement is real rather than imagined.</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- ============ 01 · FLAGSHIP ============ -->
-  <section class="section" id="work">
-    <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker" id="kicker-aiml">01 &mdash; Flagship</p>
-        <h2 id="title-aiml">Closing the AI gap for Yoruba</h2>
-        <p class="section-sub" id="sub-aiml"></p>
+        <p class="section-kicker">01 &mdash; Flagship Case Study</p>
+        <h2>Closing a 92.6% speech-recognition gap for Yorùbá</h2>
+        <p class="section-sub">
+          Pre-registered benchmarks, commercial licence audits, and transparent model cards — built solo on a strict $400 ceiling.
+        </p>
       </div>
 
       <article class="feature">
         <div class="feature-body">
           <div class="feature-head">
             <h3>Aso Oke</h3>
-            <span class="badge badge-soon">In development</span>
+            <span class="badge badge-soon">Ships 13 Dec 2026</span>
           </div>
-          <p class="feature-tag">Yoruba speech-to-text &amp; translation &middot; Solo, built in public</p>
+          <p class="feature-tag" id="flagshipSub"></p>
 
-          <p>
-            I measured the starting point first, then built against it: a custom text-cleaning
-            tool that keeps Yoruba spelling consistent (tone marks change a word's meaning, so
-            <code>ẹ</code> and <code>e</code> are different letters, and it was checked against
-            200 real sentences), a data pipeline where every source was licence-checked before
-            use, and a pass mark written down <em>before</em> any result existed — so I couldn't
-            move the goalposts afterwards.
-          </p>
-          <p>
-            The most interesting outcome is the one that didn't go to plan. I trained the
-            industry-standard speech model myself — eight passes over Yoruba speech — and it
-            still got <strong>61.4% of words wrong</strong>, failing the pass mark I'd set.
-            A model I'd never trained on, used exactly as its makers released it, got
-            <strong>32.0%</strong>, and was the one selected to ship. I chose it over my own
-            model and documented exactly why.
-          </p>
-          <p>
-            The translator was less lucky. It failed both of its own gates — accuracy
-            (<strong>11.7 out of 100</strong> against a pass mark of 25) and speed
-            (<strong>7.4 seconds</strong> against a 3-second limit) — so it launches with a
-            visible disclaimer rather than pretending to be finished. One cheap test ruled out
-            the obvious suspect and pointed at the real one; the fix is scheduled, not claimed.
-          </p>
+          <div class="feature-copy" id="flagshipCopy"></div>
 
-          <ul class="facts">
-            <li><strong>32.0%</strong> of words wrong on a held-out test set (817 clips), against 92.6% for the best tool available</li>
-            <li><strong>27.7%</strong> on speakers it had never heard — the score isn't inflated by data it had already seen</li>
-            <li><strong>32.8%</strong> on women's voices — the standard test set is entirely male, so I measured this separately</li>
-            <li><strong>4.12s</strong> to answer in 95% of requests, on one rented graphics card</li>
-            <li><strong>60.6</strong> points better than the model I started from</li>
-          </ul>
+          <!-- Pipeline Architecture Visual -->
+          <div class="arch-box" aria-label="Aso Oke inference architecture">
+            <p class="arch-label">Production Inference Pipeline</p>
+            <div class="arch-flow">
+              <div class="arch-node">
+                <span class="arch-step">01 · INPUT</span>
+                <span class="arch-name">Yorùbá Audio &amp; Text</span>
+                <span class="arch-meta">Unicode NFD tonal norm</span>
+              </div>
+              <div class="arch-node highlight">
+                <span class="arch-step">02 · ASR</span>
+                <span class="arch-name">omniASR_LLM_1B</span>
+                <span class="arch-meta">32.0% WER · Apache 2.0</span>
+              </div>
+              <div class="arch-node highlight">
+                <span class="arch-step">03 · NMT</span>
+                <span class="arch-name">MADLAD-400 + LoRA</span>
+                <span class="arch-meta">fp16 ZeroGPU · 1.99s p95</span>
+              </div>
+              <div class="arch-node">
+                <span class="arch-step">04 · POST</span>
+                <span class="arch-name">Glossary &amp; UI</span>
+                <span class="arch-meta">52 proper nouns · Gradio 5</span>
+              </div>
+            </div>
+          </div>
+
+          <ul class="facts" id="flagshipFacts"></ul>
 
           <div class="feature-actions">
-            <a class="btn btn-sm btn-primary" href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">View the repo</a>
-            <a class="btn btn-sm btn-ghost" href="https://huggingface.co/donne4real/aso-oke-madlad-lora" target="_blank" rel="noopener">See the trained model</a>
-            <span class="meta-note">Ships 13 Dec 2026</span>
+            <a class="btn btn-sm btn-primary" href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">View repository &rarr;</a>
+            <a class="btn btn-sm btn-ghost" href="https://huggingface.co/donne4real/aso-oke-madlad-lora" target="_blank" rel="noopener">Hugging Face adapter &rarr;</a>
+            <span class="meta-note">$400 budget ceiling</span>
           </div>
         </div>
 
         <aside class="feature-side">
-          <h4>Stack</h4>
-          <ul class="tags">
-            <li>Python</li><li>LoRA / PEFT</li><li>Whisper large-v3</li><li>Omnilingual ASR</li>
-            <li>MADLAD-400</li><li>FLORES-200</li><li>Gradio</li><li>HF Spaces</li>
-            <li>W&amp;B</li><li>Lightning AI</li>
-          </ul>
-          <h4 class="mt">Discipline</h4>
-          <ul class="plain-list">
-            <li>Pass marks and kill criteria, written down first</li>
-            <li>Every dataset licence-checked before use</li>
-            <li>Native-speaker validator panel before launch</li>
-            <li>Public decision log</li>
-          </ul>
+          <div>
+            <h4>Stack</h4>
+            <ul class="tags" id="flagshipStack"></ul>
+          </div>
+          <div>
+            <h4>Engineering discipline</h4>
+            <ul class="plain-list" id="flagshipDiscipline"></ul>
+          </div>
         </aside>
       </article>
     </div>
   </section>
 
-  <!-- ============ 02 · AI & ML ============ -->
-  <section class="section section-alt" id="aiml">
+  <!-- ============ 02 · INTERACTIVE PROJECT EXPLORER ============ -->
+  <section class="section" id="projects">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker" id="kicker-ai">02 &mdash; AI &amp; Machine Learning</p>
-        <h2 id="title-ai">AI that does real work</h2>
-        <p class="section-sub" id="sub-ai"></p>
+        <p class="section-kicker">02 &mdash; Shipped Systems</p>
+        <h2>Project explorer</h2>
+        <p class="section-sub">
+          21 additional shipped systems alongside Aso Oke. Filter by domain, search by stack, or click any tech tag.
+        </p>
       </div>
-      <div class="grid" id="gridAI"></div>
+
+      <div class="explorer-bar">
+        <div class="filter-pills" id="filterPills" role="group" aria-label="Filter projects by category"></div>
+
+        <div class="explorer-controls">
+          <div class="search-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="projectSearch" class="search-input" placeholder="Search projects or stack (Cloudflare, Python, Offline)..." aria-label="Search projects">
+            <span class="search-kbd" aria-hidden="true">/</span>
+          </div>
+
+          <button type="button" class="live-toggle" id="liveOnlyToggle" aria-pressed="false">
+            <span class="pulse" aria-hidden="true"></span>
+            Live apps only
+          </button>
+        </div>
+
+        <div class="active-filter-bar" id="activeFilterBar" hidden>
+          <span id="filterSummary"></span>
+          <button type="button" class="clear-btn" id="clearFilters">Clear filters</button>
+        </div>
+      </div>
+
+      <div class="grid" id="projectGrid"></div>
     </div>
   </section>
 
-  <!-- ============ 03 · FAITH & AFRICAN LANGUAGES ============ -->
-  <section class="section" id="faith">
+  <!-- ============ 03 · LIVE APPS LAUNCHPAD ============ -->
+  <section class="section section-alt" id="demos">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker" id="kicker-faith">03 &mdash; Faith &amp; African Languages</p>
-        <h2 id="title-faith">Built for the languages and churches I grew up in</h2>
-        <p class="section-sub" id="sub-faith"></p>
-      </div>
-      <div class="grid" id="gridFaith"></div>
-    </div>
-  </section>
-
-  <!-- ============ 04 · ENGINEERING ============ -->
-  <section class="section section-alt" id="engineering">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker" id="kicker-engineering">04 &mdash; Engineering</p>
-        <h2 id="title-engineering">Shipped products</h2>
-        <p class="section-sub" id="sub-engineering"></p>
-      </div>
-      <div class="grid" id="gridEng"></div>
-    </div>
-  </section>
-
-  <!-- ============ 05 · FINANCE ============ -->
-  <section class="section" id="finance">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker" id="kicker-finance">05 &mdash; Finance &amp; Stock Screening</p>
-        <h2 id="title-finance">Making sense of markets</h2>
-        <p class="section-sub" id="sub-finance"></p>
-      </div>
-      <div class="grid" id="gridFinance"></div>
-    </div>
-  </section>
-
-  <!-- ============ 06 · PRODUCTIVITY ============ -->
-  <section class="section section-alt" id="productivity">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker" id="kicker-productivity">06 &mdash; Productivity</p>
-        <h2 id="title-productivity">Tools for everyday work</h2>
-        <p class="section-sub" id="sub-productivity"></p>
-      </div>
-      <div class="grid" id="gridProductivity"></div>
-    </div>
-  </section>
-
-  <!-- ============ 07 · LEARNING & MEDIA ============ -->
-  <section class="section" id="learning">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker" id="kicker-learning">07 &mdash; Learning &amp; Media</p>
-        <h2 id="title-learning">Teaching, and telling stories</h2>
-        <p class="section-sub" id="sub-learning"></p>
-      </div>
-      <div class="grid" id="gridLearning"></div>
-    </div>
-  </section>
-
-  <!-- ============ 08 · HEALTH & TRAINING ============ -->
-  <section class="section section-alt" id="health">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker" id="kicker-health">08 &mdash; Health &amp; Training</p>
-        <h2 id="title-health">Care, and professional development</h2>
-        <p class="section-sub" id="sub-health"></p>
-      </div>
-      <div class="grid" id="gridHealth"></div>
-    </div>
-  </section>
-
-  <!-- ============ LIVE DEMOS ============ -->
-  <section class="section" id="demos">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-kicker">09 &mdash; Try them</p>
-        <h2>Live demos</h2>
-        <p class="section-sub">Everything below is running right now. Click through.</p>
+        <p class="section-kicker">03 &mdash; Live Deployments</p>
+        <h2>Try the live apps</h2>
+        <p class="section-sub">
+          12 public apps + 2 private Zero Trust apps running today on Cloudflare Pages, Workers, GitHub Pages, Streamlit and Google Play.
+        </p>
       </div>
       <div class="demo-grid" id="gridDemos"></div>
     </div>
   </section>
 
-  <!-- ============ WRITING ============ -->
-  <section class="section section-alt" id="writing">
+  <!-- ============ 04 · WRITING & FIELD NOTES ============ -->
+  <section class="section" id="writing">
     <div class="wrap">
       <div class="section-head">
-        <p class="section-kicker">10 &mdash; Writing &amp; Insights</p>
-        <h2>Field notes, not just finished things</h2>
+        <p class="section-kicker">04 &mdash; Writing &amp; Model Cards</p>
+        <h2>Field notes, not just finished demos</h2>
         <p class="section-sub">
-          The decision logs, model cards and build notes behind the work — including the parts
-          that did not go to plan.
+          Public decision logs, evaluation gates and model cards — documenting what failed alongside what shipped.
         </p>
       </div>
       <div class="grid" id="gridWriting"></div>
     </div>
   </section>
 
-  <!-- ============ ABOUT ============ -->
-  <section class="section" id="about">
-    <div class="wrap about-grid">
-      <div>
-        <p class="section-kicker">11 &mdash; About</p>
-        <h2>How I work</h2>
-        <div class="about-copy">
-          <p>
-            I came to AI from business intelligence — a decade of turning messy data into
-            decisions, and a habit of asking what a number actually means before anyone acts on it.
-            That habit is why this portfolio is built around measurement rather than demos.
-          </p>
-          <p>
-            My operating principles are simple. <strong>Define the bar before you build.</strong>
-            Write down the threshold that makes a thing shippable, then let the result decide.
-            <strong>Check the licence before you build the baseline.</strong> Half my architecture
-            decisions on Aso Oke came from checking what I was allowed to use, and one of them —
-            swapping one translation model for another — would have permanently blocked charging
-            for the product if I'd found it at launch instead of in Week 1.
-            <strong>Say what doesn't work.</strong> The published model cards and field reports
-            are as explicit about the gaps as the wins.
-          </p>
-          <p>
-            I'm currently deep in speech recognition for languages that big tech has almost no data
-            for — Yoruba is one of them — and building AI tools that run entirely on your own
-            machine, because privacy, cost and working offline shouldn't be afterthoughts.
-          </p>
-        </div>
-
-        <div class="stack-block">
-          <h3>Toolkit</h3>
-          <ul class="tags tags-lg">
-            <li>Python</li><li>PyTorch</li><li>PEFT / LoRA</li><li>Hugging Face</li>
-            <li>Transformers</li><li>Gradio</li><li>FastAPI</li><li>Flask</li>
-            <li>React</li><li>TypeScript</li><li>Tailwind</li><li>Cloudflare Workers</li>
-            <li>GitHub Actions</li><li>R / Shiny</li><li>Databricks</li><li>W&amp;B</li>
-          </ul>
-        </div>
+  <!-- ============ 05 · ABOUT & CONTACT ============ -->
+  <section class="section section-alt" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="section-kicker">05 &mdash; Engineering Philosophy &amp; Contact</p>
+        <h2>How I build</h2>
       </div>
 
-      <aside class="about-side">
-        <div class="panel">
-          <h3>Currently</h3>
-          <ul class="plain-list">
-            <li><strong>Building</strong> — Aso Oke, shipping 13 Dec 2026</li>
-            <li><strong>Certifying</strong> — CISSP, Security+ and AWS, over the next year</li>
-            <li><strong>Learning</strong> — AWS AI &amp; ML Scholars Nanodegree</li>
-            <li><strong>Based in</strong> — Virginia, USA, working remotely</li>
-          </ul>
+      <div class="principles">
+        <article class="principle">
+          <span class="principle-num">01 / MEASURE FIRST</span>
+          <h3>Pre-registered pass gates</h3>
+          <p>Write the quantitative ship threshold before training or coding. On Aso Oke, my own 8-epoch Whisper LoRA missed the gate at 61.4% WER — so zero-shot omniASR (32.0%) shipped instead.</p>
+        </article>
+        <article class="principle">
+          <span class="principle-num">02 / LICENCE FIRST</span>
+          <h3>Audit rights in Week 1</h3>
+          <p>Verify commercial licences on models and datasets before building baselines. One Week-1 swap prevented a permanent commercial launch blocker.</p>
+        </article>
+        <article class="principle">
+          <span class="principle-num">03 / REAL CONSTRAINTS</span>
+          <h3>Offline-first &amp; radical honesty</h3>
+          <p>Ship for low-bandwidth devices, on-device privacy and zero cloud bloat — and publish known failure modes visibly in model cards.</p>
+        </article>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <div class="about-copy">
+            <p>
+              I came to AI from a decade in <strong>business intelligence and data architecture</strong> — turning messy operational data into decisions, and insisting on asking what a metric actually measures before anyone acts on it.
+            </p>
+            <p>
+              Today I focus on <strong>speech recognition and translation for underserved African languages</strong>, <strong>local / on-device LLMs</strong>, and <strong>CI-tested edge applications</strong> on Cloudflare Workers and Pages.
+            </p>
+          </div>
+
+          <div class="toolkit-groups" id="toolkitGroups" aria-label="Technical toolkit (click a skill to filter projects)"></div>
         </div>
-        <div class="panel">
-          <h3>Elsewhere</h3>
-          <ul class="link-list">
-            <li><a href="https://github.com/donne4real" target="_blank" rel="noopener">github.com/donne4real</a></li>
-            <li><a href="https://www.linkedin.com/in/donne4real" target="_blank" rel="noopener">linkedin.com/in/donne4real</a></li>
-            <li><a href="mailto:leyeajibola@gmail.com">leyeajibola@gmail.com</a></li>
-            <li><a href="resume.html">Résumé (printable)</a></li>
-          </ul>
-        </div>
-      </aside>
+
+        <aside class="about-side">
+          <div class="panel">
+            <h3>Currently</h3>
+            <ul class="plain-list">
+              <li><strong>Shipping</strong> — Aso Oke Yorùbá AI (13 Dec 2026)</li>
+              <li><strong>Certifying</strong> — CISSP, Security+ &amp; AWS</li>
+              <li><strong>Learning</strong> — AWS AI &amp; ML Scholars Nanodegree</li>
+              <li><strong>Location</strong> — Virginia, USA (remote-ready)</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Contact &amp; Links</h3>
+            <ul class="link-list">
+              <li>
+                <a href="mailto:leyeajibola@gmail.com">leyeajibola@gmail.com</a>
+                <button type="button" class="copy-inline" data-copy-email>Copy</button>
+              </li>
+              <li><a href="https://github.com/donne4real" target="_blank" rel="noopener">github.com/donne4real</a></li>
+              <li><a href="https://www.linkedin.com/in/donne4real" target="_blank" rel="noopener">linkedin.com/in/donne4real</a></li>
+              <li><a href="https://huggingface.co/donne4real" target="_blank" rel="noopener">huggingface.co/donne4real</a></li>
+              <li><a href="resume.html">Printable Résumé &rarr;</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -400,16 +377,17 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <p>&copy; <span id="year">2026</span> Leye Ajibola. Built and deployed from Virginia.</p>
+    <p>&copy; <span id="year">2026</span> Leye Ajibola. Built in Virginia &middot; zero-framework HTML/CSS/JS on Cloudflare Pages.</p>
     <p class="footer-note">
-      Every number on this site is measured, not estimated — re-checked against the live apps on
-      <span id="verifyDate">17 November 2026</span>.
-      Source for all claims: <a href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">github.com/donne4real/aso-oke</a>
+      Every metric is measured against live apps &amp; repositories — verified <span id="verifyDate">25 November 2026</span>.
+      Source: <a href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">github.com/donne4real/aso-oke</a>
     </p>
   </div>
 </footer>
 
-<script src="assets/js/projects.js?v=20261123"></script>
-<script src="assets/js/main.js?v=20261123"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/projects.js?v=20261125"></script>
+<script src="assets/js/main.js?v=20261125"></script>
 </body>
 </html>
