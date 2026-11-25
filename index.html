@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261125">
+<link rel="stylesheet" href="assets/css/style.css?v=20261125b">
 
 <script type="application/ld+json">
 {
@@ -189,6 +189,9 @@
 
           <div class="feature-copy" id="flagshipCopy"></div>
 
+          <!-- Interactive Evidence & Tonal Proof Widget -->
+          <div class="proof-box" id="flagshipProof"></div>
+
           <!-- Pipeline Architecture Visual -->
           <div class="arch-box" aria-label="Aso Oke inference architecture">
             <p class="arch-label">Production Inference Pipeline</p>
@@ -219,7 +222,8 @@
           <ul class="facts" id="flagshipFacts"></ul>
 
           <div class="feature-actions">
-            <a class="btn btn-sm btn-primary" href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">View repository &rarr;</a>
+            <a class="btn btn-sm btn-primary" href="notes/aso-oke-decision-log.html">Read case study &rarr;</a>
+            <a class="btn btn-sm btn-ghost" href="https://github.com/donne4real/aso-oke" target="_blank" rel="noopener">View repository &rarr;</a>
             <a class="btn btn-sm btn-ghost" href="https://huggingface.co/donne4real/aso-oke-madlad-lora" target="_blank" rel="noopener">Hugging Face adapter &rarr;</a>
             <span class="meta-note">$400 budget ceiling</span>
           </div>
@@ -385,9 +389,19 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" hidden>
+  <div class="lightbox-inner">
+    <div class="lightbox-bar">
+      <span class="lightbox-title" id="lightboxTitle">Live preview</span>
+      <button type="button" class="lightbox-close" id="lightboxClose">Close (Esc)</button>
+    </div>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/js/projects.js?v=20261125"></script>
-<script src="assets/js/main.js?v=20261125"></script>
+<script src="assets/js/projects.js?v=20261125b"></script>
+<script src="assets/js/main.js?v=20261125b"></script>
 </body>
 </html>

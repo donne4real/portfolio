@@ -64,8 +64,46 @@ const FLAGSHIP = {
     "Gender-balanced & unseen-speaker community validation",
     "Public decision log & honest model cards"
   ],
+  proofTabs: [
+    {
+      id: "wer",
+      label: "Speech WER Gate",
+      kicker: "FLEURS Yorùbá test split · n = 817 clips",
+      summary: "An 8-epoch Whisper LoRA cut errors by 31.2 pts yet still missed the pre-registered ship gate — so zero-shot omniASR_LLM_1B (Apache 2.0) shipped instead.",
+      cards: [
+        { tag: "Baseline",    tone: "bad",  title: "Whisper large-v3",        metric: "92.6% WER", note: "Zero-shot off-the-shelf — functionally unusable on Yorùbá." },
+        { tag: "Rejected",    tone: "warn", title: "Whisper v3 + 8-ep LoRA",  metric: "61.4% WER", note: "−31.2 pts gain, still failed pre-registered pass mark." },
+        { tag: "Shipped",     tone: "ship", title: "omniASR_LLM_1B",          metric: "32.0% WER", note: "Zero-shot Apache 2.0 (−60.6 pts vs baseline)." }
+      ]
+    },
+    {
+      id: "tonal",
+      label: "Subgroup & Tonal Audit",
+      kicker: "Why public benchmarks + naive text normalization mislead",
+      summary: "Auditing FLEURS revealed val/test splits are 100% male. A 20-speaker community eval verified generalization (27.7% unseen speakers, 32.8% women's voices), paired with Unicode NFD normalization.",
+      sample: {
+        source: "Real MAFAND corpus sample (corpus/v1.0-text-final.jsonl)",
+        yoruba: "Mò ń fagi lé ètò náà.",
+        english: "\"I'm cancelling the show.\"",
+        stripped: "Mo n fagi le eto naa.",
+        why: "Stripping tone & subdot marks collapses distinct Yorùbá words (e.g. ọ/o, ẹ/e, ṣ/s). Aso Oke enforces Unicode NFD normalization validated on 200 real sentences."
+      }
+    },
+    {
+      id: "latency",
+      label: "Latency Fix vs. BLEU Gate",
+      kicker: "ZeroGPU fp16 merged weights · MADLAD-400 + MAFAND LoRA",
+      summary: "Merging LoRA weights in fp16 cut p95 latency 3.7× (beating the 3s speed gate), while translation BLEU (11.7 / 8.0 vs 25 gate) ships transparently with a visible disclaimer.",
+      cards: [
+        { tag: "Before fix",  tone: "warn", title: "Unmerged adapter",        metric: "7.40s p95", note: "Missed 3s latency gate on hosted GPU." },
+        { tag: "After fp16",  tone: "ship", title: "Merged ZeroGPU fp16",     metric: "1.99s / 2.51s", note: "p95 latency (yo→en / en→yo) + 52-entry proper-noun glossary." },
+        { tag: "Honest gap",  tone: "bad",  title: "Translation quality",     metric: "11.7 / 8.0 BLEU", note: "Below 25-pt gate — launches with explicit UI disclaimer." }
+      ]
+    }
+  ],
   links: [
     { label: "View repository", href: "https://github.com/donne4real/aso-oke", primary: true },
+    { label: "Read decision log", href: "notes/aso-oke-decision-log.html" },
     { label: "Hugging Face adapter", href: "https://huggingface.co/donne4real/aso-oke-madlad-lora", external: true }
   ]
 };
@@ -79,8 +117,15 @@ const PROJECTS = [
     kind: "Automated multi-LLM RSS pipeline",
     status: "live",
     featured: true,
+    preview: "assets/previews/naija-news.webp",
     descTech: "Daily automated Nigerian news aggregator: ingests multi-outlet RSS feeds, deduplicates and ranks stories, summarizes via Claude Haiku with Gemini + 8-provider fallback, and deploys static HTML, JSON, search index, archive and RSS via GitHub Actions to Cloudflare Pages.",
     descPlain: "An automated daily Nigerian news briefing. It gathers stories from major outlets, removes duplicates, writes concise AI summaries with automatic backup models, and publishes a fast searchable archive every morning.",
+    architecture: {
+      problem: "Manual news scanning across fragmented Nigerian outlets produces noisy duplicates and inconsistent coverage.",
+      constraints: "Zero always-on server budget; must survive individual LLM provider outages or rate limits.",
+      tradeoff: "Pre-generates static HTML/JSON/RSS daily in GitHub Actions with an 8-provider LLM fallback chain + RSS-snippet degradation instead of running a live backend.",
+      outcome: "Sub-100ms global Cloudflare Pages loads, live FX ticker, searchable archive and automated pytest CI."
+    },
     tags: ["Python", "Claude API", "Gemini", "GitHub Actions", "Cloudflare Pages", "pytest"],
     metrics: [
       ["LLM pipeline", "Claude + Gemini fallback"],
@@ -99,8 +144,15 @@ const PROJECTS = [
     kind: "Real-time browser ASR + Claude synthesis",
     status: "live",
     featured: true,
+    preview: "assets/previews/sermons.webp",
     descTech: "Streams live browser Web Speech API transcription with real-time regex scripture extraction, then sends text to Claude via Cloudflare Workers to generate structured summaries, main points and passage indices. Raw audio never leaves the device.",
     descPlain: "Press start and it transcribes a live sermon right in your browser, spots Bible verses as they are spoken, and uses AI to generate a clean summary and passage list — without ever uploading your audio.",
+    architecture: {
+      problem: "Streaming hour-long church audio to cloud speech APIs is expensive, fragile on church Wi-Fi, and raises privacy concerns.",
+      constraints: "Must run on mobile browsers with zero audio upload and survive tab backgrounding.",
+      tradeoff: "Runs Web Speech API transcription + regex verse detection entirely on-device, sending only compact text to Claude via a stateless Cloudflare Worker.",
+      outcome: "Zero audio egress, instant live verse tagging, accent selector + mic boost, and local sermon history."
+    },
     tags: ["React", "Vite", "SpeechRecognition", "Claude API", "Cloudflare Workers"],
     metrics: [
       ["Audio upload", "Zero (in-browser ASR)"],
@@ -156,8 +208,15 @@ const PROJECTS = [
     kind: "Offline-first PWA & Android app",
     status: "live",
     featured: true,
+    preview: "assets/previews/bible.webp",
     descTech: "React 19 + TypeScript + Capacitor Android/web reader bundling 19 of 22 translations offline (Yorùbá, Igbo, Hausa, Twi, Pidgin, Swahili, Amharic, Arabic RTL & more), side-by-side interlinear view, Cloudflare Workers + D1 sync, and 45 automated Jest tests.",
     descPlain: "Read the Bible in 22 African and world languages — 19 of them with no internet connection at all. Includes side-by-side comparison, 4 reading plans, WhatsApp share cards, and a Google Play Android app that collects zero user data.",
+    architecture: {
+      problem: "African-language Bible apps frequently require constant connectivity, bloat device storage, or monetize via invasive trackers.",
+      constraints: "Must run offline on low-end Android phones while supporting 22 translations (including Arabic RTL) and optional cross-device sync.",
+      tradeoff: "Bundles 19 public-domain JSON corpora with an LRU chapter cache on-device; keeps licensed APIs + Cloudflare D1 JWT/PBKDF2 sync strictly opt-in.",
+      outcome: "50+ Google Play downloads, zero data collection, 45 passing Jest tests and instant offline chapter switching."
+    },
     tags: ["React", "TypeScript", "Tailwind", "Cloudflare Workers", "Cloudflare D1", "Capacitor", "Jest"],
     metrics: [
       ["Translations", "22 (19 offline)"],
@@ -216,6 +275,12 @@ const PROJECTS = [
     featured: true,
     descTech: "Consolidated 11 legacy finance tools into one modular Python/Streamlit platform: 45 scoring models across stocks, ETFs, mutual funds & 100-baggers, multi-source API fallback with 24h SQLite cache, SEC EDGAR 10-K/10-Q parsing, DCF/DRIP, VaR/CVaR risk analytics, multi-LLM synthesis (with offline quant fallback) and 33 pytest tests.",
     descPlain: "One unified investing workbench replacing 11 older prototypes. Combines 45 scoring models, interactive technical charts, valuation calculators, portfolio risk stress tests, SEC filings and AI research briefs — backed by 33 automated tests.",
+    architecture: {
+      problem: "11 overlapping finance prototypes duplicated API clients, caching and scoring logic across 8 repos.",
+      constraints: "Free market APIs rate-limit rapidly; users may run without paid LLM keys.",
+      tradeoff: "Decoupled pure-Python core/ from Streamlit UI, backed by a 4-source fallback chain + 24h SQLite TTL cache and deterministic offline quant brief fallback.",
+      outcome: "11 tools consolidated into 1 tested codebase (45 models, 33 pytest tests in CI) with custom domain redirect."
+    },
     tags: ["Python", "Streamlit", "Plotly", "SQLite", "SEC EDGAR", "Multi-LLM", "pytest"],
     metrics: [
       ["Investment models", "45 across 4 asset classes"],
@@ -253,6 +318,7 @@ const PROJECTS = [
     title: "Powerball Predictor",
     kind: "Parity-verified statistical engine",
     status: "live",
+    preview: "assets/previews/powerball.webp",
     descTech: "Weighted frequency, hot/cold, due-number and pair analysis over 296 historical draws. Shipped as Python/Flask and a browser JS port validated for 100% numerical parity against the Python engine.",
     descPlain: "Analyses 296 past Powerball draws for hot, cold, due and pair patterns across four strategies. The browser version was tested line-by-line against the original Python engine so every output matches.",
     tags: ["Python", "Flask", "JavaScript", "Chart.js", "Statistics"],
@@ -291,8 +357,15 @@ const PROJECTS = [
     kind: "CI-gated curriculum pipeline & PWA",
     status: "live",
     featured: true,
+    preview: "assets/previews/examprep.webp",
     descTech: "Offline-first React + TypeScript + Workbox PWA for WAEC, BECE, NECO & JAMB across 12 subjects. 12,675 questions generated by repeatable Python pipelines with a pre-deploy validation gate in GitHub Actions so malformed items never ship.",
     descPlain: "Helps Nigerian students practise WAEC, NECO and JAMB past questions across 12 subjects on low-end phones with no internet. All 12,675 questions pass automated quality checks before publishing.",
+    architecture: {
+      problem: "Nigerian secondary students need reliable past-question banks across 12 subjects without paying recurring mobile data fees.",
+      constraints: "Low-RAM Android devices, offline execution, zero tolerance for malformed answer keys.",
+      tradeoff: "Moved question generation to repeatable Python build pipelines gated by automated schema & answer validation in GitHub Actions before Workbox PWA bundling.",
+      outcome: "12,675 verified questions across 4 exam boards shipped statically with zero runtime API costs."
+    },
     tags: ["React", "TypeScript", "Python", "Workbox PWA", "GitHub Actions"],
     metrics: [
       ["Exam questions", "12,675 validated"],
@@ -310,6 +383,7 @@ const PROJECTS = [
     title: "Cert Mastery",
     kind: "Offline certification exam PWA",
     status: "live",
+    preview: "assets/previews/certs.webp",
     descTech: "Offline-first installable PWA hosting 1,800 practice questions (300 each with rationales and timed exam modes) across AWS Cloud Practitioner, Security+, CISSP, PMP, NCE and NCMHCE.",
     descPlain: "Practise for six professional certifications on your phone — 300 questions each with explanations, study notes and timed tests. Installs to your home screen and works offline.",
     tags: ["JavaScript", "PWA", "Offline", "AWS", "CISSP"],
@@ -569,25 +643,34 @@ const STATS = [
   { value: "22",        label: "Active shipped systems",      note: "Plus 11 legacy finance tools consolidated into 1" }
 ];
 
-/* ---------- WRITING & FIELD NOTES ---------- */
+/* ---------- WRITING & CASE STUDIES (hosted on leyeajibola.com) ---------- */
 const WRITING = [
   {
-    title: "Aso Oke — Public Decision Log & Execution Plan",
-    kind: "Architecture & eval log",
-    desc: "Every architectural and model-selection call on Aso Oke — including why an 8-epoch Whisper LoRA fine-tune was rejected in favour of zero-shot omniASR_LLM_1B, and how Week-1 licence audits prevented a launch blocker.",
-    links: [{ label: "Read on GitHub", href: "https://github.com/donne4real/aso-oke" }]
+    title: "Why I Threw Away My 8-Epoch Whisper LoRA Fine-Tune",
+    kind: "Case study · 4 min read",
+    desc: "How pre-registered evaluation gates, discovering FLEURS Yorùbá is 100% male, Week-1 licence audits, and ZeroGPU fp16 merging shaped Aso Oke.",
+    links: [
+      { label: "Read case study", href: "notes/aso-oke-decision-log.html" },
+      { label: "Repo", href: "https://github.com/donne4real/aso-oke", external: true }
+    ]
   },
   {
-    title: "Aso Oke — MADLAD-400 LoRA Model Card",
-    kind: "Model card",
-    desc: "Published weights and transparent evaluation card for the MAFAND Yorùbá↔English translation adapter, documenting ZeroGPU fp16 latency (1.99s/2.51s p95) alongside the honest BLEU quality gap.",
-    links: [{ label: "View on Hugging Face", href: "https://huggingface.co/donne4real/aso-oke-madlad-lora", external: true }]
+    title: "Consolidating 11 Finance Prototypes into MarketSage Unified",
+    kind: "Architecture note · 3 min read",
+    desc: "Decoupling pure-Python domain engines from Streamlit UI, building a 4-source SQLite-cached fallback chain, and shipping 33 pytest tests.",
+    links: [
+      { label: "Read case study", href: "notes/marketsage-consolidation.html" },
+      { label: "Repo", href: "https://github.com/donne4real/MarketSage-Unified", external: true }
+    ]
   },
   {
-    title: "All-Projects Engineering Index",
-    kind: "Systems inventory",
-    desc: "Repositories, live Cloudflare edge deployments, test suites and CI pipelines across AI/ML, African languages, quant finance, EdTech and low-bandwidth healthcare.",
-    links: [{ label: "Explore GitHub", href: "https://github.com/donne4real" }]
+    title: "Designing Offline-First AI & Apps for Low-Bandwidth Realities",
+    kind: "Systems note · 3 min read",
+    desc: "Architectural patterns across 19-language offline Bible JSON bundles, 14,475 CI-validated exam questions, on-device ASR, and USSD clinical triage.",
+    links: [
+      { label: "Read case study", href: "notes/offline-first-africa.html" },
+      { label: "Live apps", href: "#demos" }
+    ]
   }
 ];
 

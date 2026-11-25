@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consolidating 11 Finance Prototypes into MarketSage Unified — Leye Ajibola</title>
+<meta name="description" content="How I merged 11 overlapping stock, ETF, mutual fund and risk prototypes into one decoupled, SQLite-cached, pytest-verified platform.">
+<link rel="canonical" href="https://leyeajibola.com/notes/marketsage-consolidation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consolidating 11 Finance Prototypes into MarketSage Unified">
+<meta property="og:description" content="Decoupling pure-Python domain logic from UI, 4-source API fallback with 24h SQLite caching, offline quant fallback and 33 automated tests.">
+<meta property="og:image" content="https://leyeajibola.com/assets/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leyeajibola.com/assets/og-card.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=20261125b">
+<link rel="stylesheet" href="../assets/css/notes.css?v=20261125b">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">LA</span>
+      <span class="brand-text">Leye Ajibola</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#flagship">Flagship</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#writing" class="active">Writing</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="header-controls">
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="note-wrap">
+  <a class="note-back" href="../index.html#writing">&larr; Back to portfolio</a>
+
+  <header class="note-header">
+    <div class="note-meta">
+      <span>CASE STUDY &middot; SYSTEMS ARCHITECTURE</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">3 min read</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">November 2026</span>
+    </div>
+    <h1>Consolidating 11 Finance Prototypes into MarketSage Unified</h1>
+    <p class="note-dek">
+      Shipping prototypes is easy; retiring 11 overlapping tools into one zero-duplication,
+      tested platform is where software engineering actually starts.
+    </p>
+  </header>
+
+  <article class="note-body">
+    <h2>1. The problem: prototype sprawl</h2>
+    <p>
+      Over several months of building investing tools, I had accumulated <strong>11 separate local apps and 8 GitHub repositories</strong>:
+      a 100-bagger screener, an ETF analyzer, a mutual fund analyzer, a 10-guru stock screener, a DCF/dividend calculator,
+      a multi-source SEC EDGAR fetcher, and Excel export notebooks. Each one solved a real question — and each duplicated
+      market-data fetching, caching, and UI boilerplate.
+    </p>
+    <p>
+      To answer one research question ("Does this stock pass Buffett/Lynch quality screens, how does its 5-year FCF DCF look,
+      and what do recent 10-K risks say?"), I was jumping across four apps.
+    </p>
+
+    <h2>2. Key architectural decisions</h2>
+    <ul>
+      <li><strong>Pure-Python <code>core/</code> decoupled from UI:</strong> Every domain module — <code>data_engine.py</code>, 45 strategies across 4 asset classes, <code>technicals.py</code>, <code>dividends.py</code>, <code>backtester.py</code>, <code>portfolio.py</code> (VaR/CVaR/Sortino/stress tests), and <code>ai_research.py</code> — runs headlessly with zero Streamlit imports, making unit testing fast and deterministic.</li>
+      <li><strong>Resilient 4-source fallback + 24h SQLite cache:</strong> Free financial APIs rate-limit aggressively. A configurable chain (Alpha Vantage → Twelve Data → yfinance + SEC EDGAR) backed by a single SQLite database with per-source 24-hour TTL and daily quota tracking keeps the app responsive even when a provider throttles.</li>
+      <li><strong>Deterministic offline quant fallback for AI research:</strong> The AI synthesis layer supports Claude, Gemini and OpenAI — and when no LLM key is configured (or an API fails), it degrades gracefully to a structured deterministic quant brief rather than crashing.</li>
+      <li><strong>Clean boundary with Nigerian equities:</strong> Instead of forcing Nigerian Exchange (NGX) feeds into US/global schemas, NGX stayed dedicated to its own CI-driven Cloudflare Pages pipeline (<a href="https://ngx.leyesapps.com" target="_blank" rel="noopener">ngx.leyesapps.com</a>).</li>
+    </ul>
+
+    <h2>3. Measured outcome</h2>
+    <div class="note-callout">
+      <p class="note-callout-title">Before vs. After Consolidation</p>
+      <p>
+        <strong>11 local folders &amp; 8 legacy GitHub repos</strong> archived cleanly with redirect notices →
+        <strong>1 modular codebase</strong> with <strong>45 investment models</strong>, 9 Streamlit dashboards,
+        styled multi-sheet Excel exports, <strong>33 automated pytest tests</strong> running in GitHub Actions CI,
+        and a Cloudflare Worker custom domain at
+        <a href="https://marketsage.leyesapps.com" target="_blank" rel="noopener">marketsage.leyesapps.com</a>.
+      </p>
+    </div>
+
+    <div class="note-nav">
+      <a class="btn btn-sm btn-ghost" href="aso-oke-decision-log.html">&larr; Prev: Aso Oke Eval Gate</a>
+      <a class="btn btn-sm btn-primary" href="offline-first-africa.html">Next: Offline-First Systems &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<script>
+(function(){var s=null;try{s=localStorage.getItem("la-theme")}catch(_){}var p=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function a(t){document.documentElement.setAttribute("data-theme",t);var x=document.getElementById("iconSun"),y=document.getElementById("iconMoon");if(x&&y){x.style.display=t==="light"?"none":"block";y.style.display=t==="light"?"block":"none"}}a(s||p);var b=document.getElementById("themeToggle");if(b)b.addEventListener("click",function(){var n=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";a(n);try{localStorage.setItem("la-theme",n)}catch(_){}})})();
+</script>
+</body>
+</html>

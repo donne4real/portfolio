@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designing Offline-First AI &amp; Apps for Low-Bandwidth Realities — Leye Ajibola</title>
+<meta name="description" content="Architectural patterns across 19-language offline Bible bundles, 12,675 CI-gated exam questions, browser-side ASR, and WhatsApp/USSD clinical triage.">
+<link rel="canonical" href="https://leyeajibola.com/notes/offline-first-africa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Offline-First AI &amp; Apps for Low-Bandwidth Realities">
+<meta property="og:description" content="How offline-first architecture cuts latency, protects privacy and keeps AI &amp; consumer tools usable without reliable connectivity.">
+<meta property="og:image" content="https://leyeajibola.com/assets/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leyeajibola.com/assets/og-card.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=20261125b">
+<link rel="stylesheet" href="../assets/css/notes.css?v=20261125b">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">LA</span>
+      <span class="brand-text">Leye Ajibola</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#flagship">Flagship</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#writing" class="active">Writing</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="header-controls">
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="note-wrap">
+  <a class="note-back" href="../index.html#writing">&larr; Back to portfolio</a>
+
+  <header class="note-header">
+    <div class="note-meta">
+      <span>CASE STUDY &middot; OFFLINE-FIRST ENGINEERING</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">3 min read</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">November 2026</span>
+    </div>
+    <h1>Designing Offline-First AI &amp; Apps for Low-Bandwidth Realities</h1>
+    <p class="note-dek">
+      Offline-first isn't a fallback mode — it's an architectural choice that simultaneously solves
+      connectivity, privacy and recurring cloud bills.
+    </p>
+  </header>
+
+  <article class="note-body">
+    <h2>Why "always online" fails real users</h2>
+    <p>
+      A student preparing for WAEC on a budget Android phone, a churchgoer switching between Yorùbá and English
+      scripture with spotty signal, or a clinician triaging patients over USSD cannot rely on round-tripping
+      every tap to a distant cloud server. Designing for constrained networks forces cleaner systems everywhere.
+    </p>
+
+    <h2>Four patterns I reuse across shipped products</h2>
+    <ul>
+      <li><strong>Bundle static data + make cloud sync optional (<a href="https://bible.leyesapps.com" target="_blank" rel="noopener">Bible in African Languages</a>):</strong> 19 of 22 translations ship as static JSON with an LRU chapter cache so reading, search, highlights and reading plans work instantaneously with zero signal. Cross-device Cloudflare D1 sync is opt-in and debounced — and the Android app collects zero tracking data.</li>
+      <li><strong>Move data generation &amp; validation to CI (<a href="https://donne4real.github.io/exam-prep-ng/" target="_blank" rel="noopener">Exam Prep NG</a> &amp; <a href="https://certs.leyesapps.com" target="_blank" rel="noopener">Cert Mastery</a>):</strong> Instead of calling an LLM at runtime for quiz questions, Python pipelines generate and validate <strong>14,475 questions</strong> at build time behind a CI test gate, then ship them as lightweight Workbox PWAs. Zero runtime token cost; zero hallucinated answers reaching students.</li>
+      <li><strong>Keep sensitive inputs on-device (<a href="https://sermons.leyesapps.com" target="_blank" rel="noopener">Sermon Listener</a> &amp; DataInsight):</strong> Sermon Listener runs Web Speech API transcription locally in the browser so raw audio never touches a server; DataInsight runs local LLMs directly on the user's machine so confidential spreadsheets never leave the laptop.</li>
+      <li><strong>Use deterministic safety gates where LLMs don't belong (TeleTriage):</strong> For WhatsApp and Africa's Talking USSD symptom triage, emergency red-flag rules are hard-coded deterministically into Red/Yellow/Green priority routing before reaching the FastAPI clinician dashboard — predictable, auditable, and resilient on 2G connections.</li>
+    </ul>
+
+    <div class="note-callout">
+      <p class="note-callout-title">The unexpected bonus</p>
+      <p>
+        Building offline-first also makes hosting nearly free: 14 live web apps run on Cloudflare Pages, Workers,
+        D1, KV and GitHub Pages with sub-100ms edge response times and minimal operational overhead.
+      </p>
+    </div>
+
+    <div class="note-nav">
+      <a class="btn btn-sm btn-ghost" href="marketsage-consolidation.html">&larr; Prev: MarketSage Consolidation</a>
+      <a class="btn btn-sm btn-primary" href="../index.html#projects">Explore all projects &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<script>
+(function(){var s=null;try{s=localStorage.getItem("la-theme")}catch(_){}var p=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function a(t){document.documentElement.setAttribute("data-theme",t);var x=document.getElementById("iconSun"),y=document.getElementById("iconMoon");if(x&&y){x.style.display=t==="light"?"none":"block";y.style.display=t==="light"?"block":"none"}}a(s||p);var b=document.getElementById("themeToggle");if(b)b.addEventListener("click",function(){var n=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";a(n);try{localStorage.setItem("la-theme",n)}catch(_){}})})();
+</script>
+</body>
+</html>

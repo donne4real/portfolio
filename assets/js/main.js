@@ -7,6 +7,7 @@
 
   var state = {
     mode: "tech",        // "tech" | "plain"
+    proofTab: "wer",
     category: "all",
     liveOnly: false,
     search: "",
@@ -157,6 +158,54 @@
         return '<li>' + esc(d) + '</li>';
       }).join("");
     }
+
+    renderProofWidget();
+  }
+
+  function renderProofWidget() {
+    var box = document.getElementById("flagshipProof");
+    if (!box || !FLAGSHIP.proofTabs) return;
+    var active = FLAGSHIP.proofTabs.find(function (t) { return t.id === state.proofTab; }) || FLAGSHIP.proofTabs[0];
+
+    var tabsHtml = '<div class="proof-tabs" role="tablist" aria-label="Aso Oke measured evidence">' +
+      FLAGSHIP.proofTabs.map(function (t) {
+        var sel = t.id === active.id;
+        return '<button type="button" class="proof-tab" role="tab" data-proof-tab="' + esc(t.id) + '" aria-selected="' + sel + '">' + esc(t.label) + '</button>';
+      }).join("") + '</div>';
+
+    var bodyHtml = '<p class="proof-kicker">' + esc(active.kicker) + '</p>' +
+      '<p class="proof-summary">' + esc(active.summary) + '</p>';
+
+    if (active.cards) {
+      bodyHtml += '<div class="proof-compare">' + active.cards.map(function (c) {
+        return '<div class="proof-item ' + esc(c.tone) + '">' +
+          '<span class="proof-item-tag">' + esc(c.tag) + '</span>' +
+          '<span class="proof-item-title">' + esc(c.title) + '</span>' +
+          '<span class="proof-item-metric">' + esc(c.metric) + '</span>' +
+          '<span class="proof-item-note">' + esc(c.note) + '</span>' +
+        '</div>';
+      }).join("") + '</div>';
+    } else if (active.sample) {
+      var sm = active.sample;
+      bodyHtml += '<div class="tone-sample">' +
+        '<div class="tone-grid">' +
+          '<div class="tone-col">' +
+            '<span class="tone-col-lbl good">Unicode NFD tonal Yorùbá (preserved)</span>' +
+            '<p class="tone-quote">' + esc(sm.yoruba) + '</p>' +
+            '<p class="tone-trans">' + esc(sm.english) + '</p>' +
+          '</div>' +
+          '<div class="tone-col">' +
+            '<span class="tone-col-lbl bad">Tone-stripped ASCII (corrupted)</span>' +
+            '<p class="tone-quote">' + esc(sm.stripped) + '</p>' +
+            '<p class="tone-trans">Ambiguous lexical tone &amp; vowel subdots lost</p>' +
+          '</div>' +
+        '</div>' +
+        '<p class="tone-why">' + esc(sm.why) + '</p>' +
+        '<span class="tone-src">' + esc(sm.source) + '</span>' +
+      '</div>';
+    }
+
+    box.innerHTML = tabsHtml + '<div class="proof-panel" role="tabpanel">' + bodyHtml + '</div>';
   }
 
   function matchesProject(p) {
@@ -220,10 +269,31 @@
         }).join("") + '</div>'
       : "";
 
+    var previewHtml = p.preview
+      ? '<button type="button" class="card-preview" data-preview-src="' + esc(p.preview) + '" data-preview-title="' + esc(p.title) + '" aria-label="Enlarge screenshot of ' + esc(p.title) + '">' +
+          '<img src="' + esc(p.preview) + '" alt="' + esc(p.title) + ' live interface preview" loading="lazy" decoding="async" width="800" height="475">' +
+          '<span class="card-preview-badge">Preview</span>' +
+        '</button>'
+      : "";
+
+    var archHtml = p.architecture
+      ? '<details class="arch-drawer">' +
+          '<summary>Architecture &amp; tradeoffs</summary>' +
+          '<dl class="arch-drawer-list">' +
+            '<dt>Problem</dt><dd>' + esc(p.architecture.problem) + '</dd>' +
+            '<dt>Constraints</dt><dd>' + esc(p.architecture.constraints) + '</dd>' +
+            '<dt>Key tradeoff</dt><dd>' + esc(p.architecture.tradeoff) + '</dd>' +
+            '<dt>Outcome</dt><dd>' + esc(p.architecture.outcome) + '</dd>' +
+          '</dl>' +
+        '</details>'
+      : "";
+
     return '<article class="card">' +
+      previewHtml +
       '<div class="card-top"><h3>' + esc(p.title) + '</h3>' + badge + '</div>' +
       '<p class="card-kind">' + esc(p.kind) + '</p>' +
       '<p class="card-desc">' + esc(desc) + '</p>' +
+      archHtml +
       metricsHtml +
       tagsHtml +
       linksHtml +
@@ -307,7 +377,8 @@
     if (!el) return;
     el.innerHTML = WRITING.map(function (w) {
       var links = (w.links || []).map(function (l) {
-        return '<a href="' + esc(l.href) + '" target="_blank" rel="noopener">' +
+        var ext = l.external || /^https?:\/\//.test(l.href);
+        return '<a href="' + esc(l.href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
           esc(l.label) + ' <span class="arrow" aria-hidden="true">&rarr;</span></a>';
       }).join("");
       return '<article class="card">' +
@@ -379,8 +450,19 @@
       });
     }
 
-    // Tag filtering from cards or toolkit
+    // Tag filtering, proof tabs & preview lightbox
     document.addEventListener("click", function (e) {
+      var proofBtn = e.target.closest("[data-proof-tab]");
+      if (proofBtn) {
+        state.proofTab = proofBtn.getAttribute("data-proof-tab");
+        renderProofWidget();
+        return;
+      }
+      var prevBtn = e.target.closest("[data-preview-src]");
+      if (prevBtn) {
+        openLightbox(prevBtn.getAttribute("data-preview-src"), prevBtn.getAttribute("data-preview-title"));
+        return;
+      }
       var tagBtn = e.target.closest("[data-filter-tag]");
       if (tagBtn) {
         var clicked = tagBtn.getAttribute("data-filter-tag");
@@ -399,6 +481,19 @@
         if (explorer) explorer.scrollIntoView({ behavior: "smooth" });
         showToast("Filtered projects by " + state.tag);
       }
+    });
+
+    // Lightbox close handlers
+    var lb = document.getElementById("lightbox");
+    var lbClose = document.getElementById("lightboxClose");
+    if (lbClose) lbClose.addEventListener("click", closeLightbox);
+    if (lb) {
+      lb.addEventListener("click", function (e) {
+        if (e.target === lb) closeLightbox();
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
     });
 
     // Clear filters button
@@ -437,6 +532,22 @@
         }
       });
     }
+  }
+
+  function openLightbox(src, title) {
+    var lb = document.getElementById("lightbox");
+    var img = document.getElementById("lightboxImg");
+    var t = document.getElementById("lightboxTitle");
+    if (!lb || !img || !t) return;
+    img.src = src;
+    img.alt = (title || "Project") + " live interface preview";
+    t.textContent = title || "Live preview";
+    lb.hidden = false;
+  }
+
+  function closeLightbox() {
+    var lb = document.getElementById("lightbox");
+    if (lb) lb.hidden = true;
   }
 
   /* ---------- boot ---------- */

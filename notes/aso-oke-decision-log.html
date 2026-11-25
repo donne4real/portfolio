@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why I Threw Away My 8-Epoch Whisper LoRA Fine-Tune — Leye Ajibola</title>
+<meta name="description" content="How pre-registered evaluation gates, a FLEURS gender-bias audit, and Apache-2.0 licence checks shaped Aso Oke — cutting Yorùbá WER from 92.6% to 32.0%.">
+<link rel="canonical" href="https://leyeajibola.com/notes/aso-oke-decision-log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why I Threw Away My 8-Epoch Whisper LoRA Fine-Tune">
+<meta property="og:description" content="Pre-registered evaluation gates, FLEURS 100%-male audit findings, ZeroGPU fp16 latency optimization (7.4s → 1.99s) and transparent model cards on Aso Oke.">
+<meta property="og:image" content="https://leyeajibola.com/assets/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leyeajibola.com/assets/og-card.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=20261125b">
+<link rel="stylesheet" href="../assets/css/notes.css?v=20261125b">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">LA</span>
+      <span class="brand-text">Leye Ajibola</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#flagship">Flagship</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#writing" class="active">Writing</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="header-controls">
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="note-wrap">
+  <a class="note-back" href="../index.html#writing">&larr; Back to portfolio</a>
+
+  <header class="note-header">
+    <div class="note-meta">
+      <span>CASE STUDY &middot; ASO OKE</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">4 min read</span>
+      <span class="dim">&middot;</span>
+      <span class="dim">November 2026</span>
+    </div>
+    <h1>Why I Threw Away My 8-Epoch Whisper LoRA Fine-Tune</h1>
+    <p class="note-dek">
+      Pre-registered evaluation gates, discovering that the standard Yorùbá benchmark is 100% male,
+      and why shipping a zero-shot Apache-2.0 model beat sunk-cost pride.
+    </p>
+  </header>
+
+  <article class="note-body">
+    <h2>1. Write the pass mark before training starts</h2>
+    <p>
+      Most solo ML projects fail silently by moving the goalposts after seeing their first validation curve.
+      When I started <strong>Aso Oke</strong> — a Yorùbá↔English speech-to-text and translation application
+      built on a strict <strong>$400 budget ceiling</strong> — I wrote down every pass gate and kill criterion
+      before spending a dollar on GPU compute.
+    </p>
+    <p>
+      First came the baseline. Running OpenAI's <code>Whisper large-v3</code> zero-shot on the FLEURS Yorùbá
+      test split (817 clips) produced a <strong>92.6% word error rate (WER)</strong> — functionally unusable.
+      Before touching any training loop, I also built a custom <strong>Unicode NFD diacritic normalizer</strong>
+      validated against 200 real Yorùbá sentences: in a tonal language, <code>ọ</code> and <code>o</code> or
+      <code>ẹ</code> and <code>e</code> change a word's meaning entirely, so sloppy text normalization corrupts
+      both training targets and WER scoring.
+    </p>
+
+    <h2>2. The fine-tune improved 31 points — and still got rejected</h2>
+    <p>
+      Following standard fine-tuning playbooks, I trained an 8-epoch LoRA adapter on Whisper large-v3.
+      WER dropped from <strong>92.6%</strong> to <strong>61.4%</strong> — a 31.2-point improvement that would
+      look great in a LinkedIn chart.
+    </p>
+    <p>
+      The problem: <strong>61.4% WER still failed my pre-registered ship gate</strong>. Rather than rationalizing
+      the result, I evaluated Meta's Apache-2.0 <code>omniASR_LLM_1B</code> zero-shot on the exact same 817-clip
+      test split. It landed at <strong>32.0% WER</strong> — beating my fine-tune by nearly 30 points with zero
+      training cost. The decision was immediate: shelve my own fine-tune and ship <code>omniASR_LLM_1B</code>.
+    </p>
+
+    <div class="note-table-wrap">
+      <table class="note-table">
+        <thead>
+          <tr><th>Model</th><th>Evaluation Split</th><th>WER</th><th>Outcome</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Whisper large-v3 (zero-shot)</td><td>FLEURS Yorùbá test (817 clips)</td><td class="mono bad">92.6%</td><td>Baseline</td></tr>
+          <tr><td>Whisper large-v3 + 8-epoch LoRA</td><td>FLEURS Yorùbá test (817 clips)</td><td class="mono warn">61.4%</td><td>Rejected (missed gate)</td></tr>
+          <tr><td><strong>omniASR_LLM_1B (Apache 2.0)</strong></td><td>FLEURS Yorùbá test (817 clips)</td><td class="mono good">32.0%</td><td><strong>Selected to ship</strong></td></tr>
+          <tr><td>omniASR_LLM_1B</td><td>20-speaker community holdout</td><td class="mono good">27.7%</td><td>Unseen-speaker check</td></tr>
+          <tr><td>omniASR_LLM_1B</td><td>Women's voices subset</td><td class="mono good">32.8%</td><td>Gender-bias audit</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Catching the 100%-male benchmark blind spot</h2>
+    <p>
+      While auditing FLEURS Yorùbá validation and test splits, I discovered that <strong>both splits are 100% male</strong>.
+      Reporting only FLEURS WER would hide whether the model collapsed on women's voices. I assembled a 20-speaker
+      community evaluation set and measured subgroup performance directly: <strong>27.7% WER</strong> on unseen
+      holdout speakers and <strong>32.8% WER</strong> on women's voices — confirming the gains generalize beyond
+      the public benchmark.
+    </p>
+
+    <h2>4. Licence audits &amp; honest translation tradeoffs</h2>
+    <p>
+      In Week 1, a commercial licence audit caught a translation model restriction that would have permanently
+      blocked charging for the product if discovered at launch. Swapping early to <code>google/madlad400-3b-mt</code>
+      with a custom MAFAND LoRA adapter (published at
+      <a href="https://huggingface.co/donne4real/aso-oke-madlad-lora" target="_blank" rel="noopener">donne4real/aso-oke-madlad-lora</a>)
+      kept the entire stack commercially clean.
+    </p>
+    <p>
+      On inference speed, early runs hit <strong>7.4s p95</strong> against a 3-second latency target. Merging the
+      LoRA adapter weights in <code>fp16</code> on Hugging Face ZeroGPU brought p95 latency down to
+      <strong>1.99s</strong> (<code>yo→en</code>) and <strong>2.51s</strong> (<code>en→yo</code>) — a <strong>3.7× speedup</strong>
+      — paired with a 52-entry proper-noun post-processing glossary.
+    </p>
+
+    <div class="note-callout">
+      <p class="note-callout-title">Radical honesty on the translation quality gate</p>
+      <p>
+        Translation BLEU currently measures <strong>11.7 / 8.0</strong> against a pre-registered 25-point gate.
+        Rather than hiding that gap or cherry-picking examples, Aso Oke launches on <strong>13 Dec 2026</strong>
+        with a visible quality disclaimer on translation while speech recognition ships at full confidence.
+      </p>
+    </div>
+
+    <div class="note-nav">
+      <a class="btn btn-sm btn-ghost" href="../index.html#flagship">&larr; Back to Flagship</a>
+      <a class="btn btn-sm btn-primary" href="marketsage-consolidation.html">Next: Consolidating 11 Finance Apps &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<script>
+(function(){var s=null;try{s=localStorage.getItem("la-theme")}catch(_){}var p=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function a(t){document.documentElement.setAttribute("data-theme",t);var x=document.getElementById("iconSun"),y=document.getElementById("iconMoon");if(x&&y){x.style.display=t==="light"?"none":"block";y.style.display=t==="light"?"block":"none"}}a(s||p);var b=document.getElementById("themeToggle");if(b)b.addEventListener("click",function(){var n=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";a(n);try{localStorage.setItem("la-theme",n)}catch(_){}})})();
+</script>
+</body>
+</html>

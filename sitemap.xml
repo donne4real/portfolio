@@ -7,7 +7,25 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://leyeajibola.com/resume.html</loc>
+    <loc>https://leyeajibola.com/resume</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leyeajibola.com/notes/aso-oke-decision-log</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://leyeajibola.com/notes/marketsage-consolidation</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leyeajibola.com/notes/offline-first-africa</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
